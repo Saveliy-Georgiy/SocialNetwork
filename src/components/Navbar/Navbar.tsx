@@ -11,9 +11,18 @@ const Navbar = () => {
                 <div className = {s.item}>
                     <Link to="/dialogs">Messages</Link>
                 </div>
-                <div className = {s.item}><a>News</a></div>
+                <div className = {s.item}>
+                    <Link to="/news">News</Link>
+                </div>
+                <div className = {s.item}>
+                    <Link to="/music">Music</Link>
+                </div>
+                <div className = {s.item}>
+                    <Link to="/settings">Settings</Link>
+                </div>
+             {/*   <div className = {s.item}><a>News</a></div>
                 <div className = {s.item}><a>Music</a></div>
-                <div className = {s.item}><a>Settings</a></div>
+                <div className = {s.item}><a>Settings</a></div>*/}
             </nav>
     );
 };
