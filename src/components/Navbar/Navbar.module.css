@@ -1,10 +1,12 @@
 .nav {
     padding: 20px;
     grid-area: n;
-    background-color: burlywood;
+    background-color: rgb(74, 73, 73);
+    margin-right: 10px;
 }
 
 .item {
+    font-size: 22px;
     color: white;
     text-decoration: none;
 }

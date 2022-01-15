@@ -2,6 +2,7 @@
   margin: 0 auto;
   display: grid;
   width: 1200px;
+  padding: 22px;
 
   grid-template-areas:
 "h h"
