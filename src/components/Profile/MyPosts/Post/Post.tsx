@@ -8,14 +8,16 @@ type PostType = {
 
 const Post = (props: PostType) => {
     return (
-        <div>
-            <div className={s.posts}>
-                <div className={s.item}>
-                    <img src="https://download-cs.net/steam/avatars/3405.jpg" alt="avatar"/>
-                    {props.message}
-                </div>
-                <button>like</button>
-                <div>{props.likes}</div>
+        <div className={s.posts}>
+            <div className={s.item}>
+                <img src="https://download-cs.net/steam/avatars/3405.jpg" alt="avatar"/>
+            </div>
+            <div className={s.textMessage}>{props.message}</div>
+            <div className={s.likes}>
+            <div className={s.buttonWrapper}>
+                <button>Like</button>
+            </div>
+            <div>{props.likes}</div>
             </div>
         </div>
     );
