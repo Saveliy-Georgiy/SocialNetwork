@@ -2,6 +2,22 @@ import React from 'react';
 import s from './MyPosts.module.css'
 import Post from "./Post/Post";
 
+export type PostType = {
+    id: number
+    message: string
+    likes: number
+}
+
+const messagesData = [
+    {id: 1, message: "Hi, how a you?", likes: 25},
+    {id: 2, message: "It's my first post", likes: 15},
+    {id: 3, message: "Yo", likes: 33},
+]
+
+const posts = messagesData.map((m: PostType) =>
+    <Post key={m.id} id={m.id} message={m.message} likes={m.likes}/>
+)
+
 const MyPosts = () => {
     return (
         <div className={s.postsBlock}>
@@ -21,9 +37,7 @@ const MyPosts = () => {
 
             </div>
             <div className={s.posts}>
-                <Post message="Hi, how a you?" likes={15}/>
-                <Post message="It's my first post" likes={20}/>
-                <Post message={"Yo"} likes={33}/>
+                {posts}
             </div>
         </div>
     );

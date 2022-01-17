@@ -1,10 +1,6 @@
 import React from 'react';
+import {PostType} from '../MyPosts';
 import s from './Post.module.css'
-
-type PostType = {
-    message: string
-    likes: number
-}
 
 const Post = (props: PostType) => {
     return (
@@ -14,10 +10,10 @@ const Post = (props: PostType) => {
             </div>
             <div className={s.textMessage}>{props.message}</div>
             <div className={s.likes}>
-            <div className={s.buttonWrapper}>
-                <button>Like</button>
-            </div>
-            <div>{props.likes}</div>
+                <div className={s.buttonWrapper}>
+                    <button>Like</button>
+                </div>
+                <div>{props.likes}</div>
             </div>
         </div>
     );
