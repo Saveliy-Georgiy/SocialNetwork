@@ -15,7 +15,7 @@ const MyPosts = () => {
                     <textarea placeholder="your news..."></textarea>
                 </div>
 
-                <div className={s.button}>
+                <div className={s.buttonWrapper}>
                     <button>Add post</button>
                 </div>
 

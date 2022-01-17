@@ -28,14 +28,24 @@
     font-size: 16px;
 }
 
-.button {
+.buttonWrapper {
     display: flex;
     align-self: flex-end;
 }
 
-.button button {
-    background-color: rgb(74, 73, 73);
+.buttonWrapper button {
+    background-color: #4CAF50;
     font-size: 18px;
+    border: none;
+    border-radius: 4px;
+    color: white;
+    padding: 4px;
+    width: 100px;
+}
+
+.buttonWrapper button:active {
+    transform: scale(0.98);
+    box-shadow: 3px 2px 22px 1px rgba(0, 0, 0, 0.24);
 }
 
 .posts {
