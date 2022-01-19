@@ -14,7 +14,7 @@ export type MessageType = {
     message: string
 }
 
-const dialogsData = [
+const dialogs = [
     {id: 1, name: "Saveliy"},
     {id: 2, name: "Dima"},
     {id: 3, name: "Egor"},
@@ -22,7 +22,7 @@ const dialogsData = [
     {id: 5, name: "Vano"},
 ]
 
-const messagesData = [
+const messages = [
     {id: 1, message: "Yo"},
     {id: 2, message: "How are you?"},
     {id: 3, message: "Hello"},
@@ -32,11 +32,11 @@ const messagesData = [
 
 const Dialogs = () => {
 
-    const dialogsItem = dialogsData.map((d: DialogsItemType) =>
+    const dialogsItem = dialogs.map((d: DialogsItemType) =>
         <DialogsItem key={d.id} id={d.id} name={d.name}/>
     )
 
-    const messagesItem = messagesData.map((m: MessageType) =>
+    const messagesItem = messages.map((m: MessageType) =>
         <Message key={m.id} id={m.id} message={m.message}/>
     )
 

@@ -8,13 +8,13 @@ export type PostType = {
     likes: number
 }
 
-const messagesData = [
+const messages = [
     {id: 1, message: "Hi, how a you?", likes: 25},
     {id: 2, message: "It's my first post", likes: 15},
     {id: 3, message: "Yo", likes: 33},
 ]
 
-const posts = messagesData.map((m: PostType) =>
+const posts = messages.map((m: PostType) =>
     <Post key={m.id} id={m.id} message={m.message} likes={m.likes}/>
 )
 
