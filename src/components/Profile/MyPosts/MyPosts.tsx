@@ -8,13 +8,13 @@ export type PostType = {
     likes: number
 }
 
-const messages = [
+const posts = [
     {id: 1, message: "Hi, how a you?", likes: 25},
     {id: 2, message: "It's my first post", likes: 15},
     {id: 3, message: "Yo", likes: 33},
 ]
 
-const posts = messages.map((m: PostType) =>
+const postsElements = posts.map((m: PostType) =>
     <Post key={m.id} id={m.id} message={m.message} likes={m.likes}/>
 )
 
@@ -37,7 +37,7 @@ const MyPosts = () => {
 
             </div>
             <div className={s.posts}>
-                {posts}
+                {postsElements}
             </div>
         </div>
     );
