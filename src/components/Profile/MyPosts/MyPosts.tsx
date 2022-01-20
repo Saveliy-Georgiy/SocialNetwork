@@ -1,24 +1,18 @@
 import React from 'react';
+import { PostType } from '../../..';
 import s from './MyPosts.module.css'
 import Post from "./Post/Post";
 
-export type PostType = {
-    id: number
-    message: string
-    likes: number
+export type MyPostsPropsType = {
+    posts: Array<PostType>
 }
 
-const posts = [
-    {id: 1, message: "Hi, how a you?", likes: 25},
-    {id: 2, message: "It's my first post", likes: 15},
-    {id: 3, message: "Yo", likes: 33},
-]
+const MyPosts = (props: MyPostsPropsType) => {
 
-const postsElements = posts.map((m: PostType) =>
-    <Post key={m.id} id={m.id} message={m.message} likes={m.likes}/>
-)
+    const postsElements = props.posts.map((m: PostType) =>
+        <Post key={m.id} id={m.id} message={m.message} likes={m.likes}/>
+    )
 
-const MyPosts = () => {
     return (
         <div className={s.postsBlock}>
             <div className={s.newPosts}>

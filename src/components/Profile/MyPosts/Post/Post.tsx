@@ -1,6 +1,6 @@
 import React from 'react';
-import {PostType} from '../MyPosts';
 import s from './Post.module.css'
+import {PostType} from "../../../../index";
 
 const Post = (props: PostType) => {
     return (

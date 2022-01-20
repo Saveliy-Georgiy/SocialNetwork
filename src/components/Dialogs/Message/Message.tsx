@@ -1,6 +1,6 @@
 import React from 'react';
-import {MessageType} from '../Dialogs';
 import s from './Message.module.css';
+import {MessageType} from "../../../index";
 
 const Message = (props: MessageType) => {
     return (

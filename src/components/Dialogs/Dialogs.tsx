@@ -3,40 +3,20 @@ import s from './Dialogs.module.css';
 import {NavLink} from "react-router-dom";
 import DialogsItem from "./DialogsItem/DialogsItem";
 import Message from "./Message/Message";
+import {DialogsItemType, MessageType} from "../../index";
 
-export type DialogsItemType = {
-    id: number
-    name: string
+type DialogsPropsType = {
+    dialogs: Array<DialogsItemType>
+    messages: Array<MessageType>
 }
 
-export type MessageType = {
-    id: number
-    message: string
-}
+const Dialogs = (props: DialogsPropsType) => {
 
-const dialogs = [
-    {id: 1, name: "Saveliy"},
-    {id: 2, name: "Dima"},
-    {id: 3, name: "Egor"},
-    {id: 4, name: "Artem"},
-    {id: 5, name: "Vano"},
-]
-
-const messages = [
-    {id: 1, message: "Yo"},
-    {id: 2, message: "How are you?"},
-    {id: 3, message: "Hello"},
-    {id: 4, message: "Nice project"},
-    {id: 5, message: "What am I doing here?"},
-]
-
-const Dialogs = () => {
-
-    const dialogsItem = dialogs.map((d: DialogsItemType) =>
+    const dialogsItem = props.dialogs.map((d: DialogsItemType) =>
         <DialogsItem key={d.id} id={d.id} name={d.name}/>
     )
 
-    const messagesItem = messages.map((m: MessageType) =>
+    const messagesItem = props.messages.map((m: MessageType) =>
         <Message key={m.id} id={m.id} message={m.message}/>
     )
 

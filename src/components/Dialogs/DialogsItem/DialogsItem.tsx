@@ -1,7 +1,7 @@
 import React from 'react';
 import s from './DialogsItem.module.css';
 import {NavLink} from "react-router-dom";
-import { DialogsItemType } from '../Dialogs';
+import {DialogsItemType} from "../../../index";
 
 const DialogsItem = (props:DialogsItemType) => {
 
