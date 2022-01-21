@@ -1,11 +1,9 @@
 import React from 'react';
-import { PostType } from '../../..';
 import s from './MyPosts.module.css'
+import {PostType, ProfilePageType} from "../../../redux/state";
 import Post from "./Post/Post";
 
-export type MyPostsPropsType = {
-    posts: Array<PostType>
-}
+export type MyPostsPropsType =  ProfilePageType
 
 const MyPosts = (props: MyPostsPropsType) => {
 

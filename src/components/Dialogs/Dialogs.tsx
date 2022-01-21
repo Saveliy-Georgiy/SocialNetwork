@@ -3,12 +3,9 @@ import s from './Dialogs.module.css';
 import {NavLink} from "react-router-dom";
 import DialogsItem from "./DialogsItem/DialogsItem";
 import Message from "./Message/Message";
-import {DialogsItemType, MessageType} from "../../index";
+import {DialogPageType, DialogsItemType, MessageType} from "../../redux/state";
 
-type DialogsPropsType = {
-    dialogs: Array<DialogsItemType>
-    messages: Array<MessageType>
-}
+type DialogsPropsType = DialogPageType
 
 const Dialogs = (props: DialogsPropsType) => {
 
