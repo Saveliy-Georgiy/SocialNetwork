@@ -1,3 +1,5 @@
+import {v1} from 'uuid'
+
 export type PostType = {
     id: number
     message: string
@@ -23,8 +25,13 @@ export type DialogPageType = {
     messages: Array<MessageType>
 }
 
-export type SidebarType = {
+export type FriendsType = {
+    id: string
+    name: string
+}
 
+export type SidebarType = {
+    friends: Array<FriendsType>
 }
 
 export type RootStateType = {
@@ -55,7 +62,13 @@ let state: RootStateType = {
             {id: 5, message: "What am I doing here?"},
         ],
     },
-    sidebar: {}
+    sidebar: {
+        friends: [
+            {id: v1(), name: "Dima"},
+            {id: v1(), name: "Egor"},
+            {id: v1(), name: "Vanya"},
+        ]
+    }
 }
 
 export default state

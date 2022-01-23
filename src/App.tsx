@@ -15,7 +15,7 @@ const App = (props: AppPropsType) => {
     return (
             <div className="appWrapper">
                 <Header/>
-                <Navbar/>
+                <Navbar friends={props.appState.sidebar.friends}/>
                 <div className="appWrapperContent">
                     <Routes>
                         <Route path="/profile" element={<Profile posts={props.appState.profilePage.posts}/>}/>

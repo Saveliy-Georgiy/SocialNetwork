@@ -1,0 +1,19 @@
+.friend {
+    margin: 10px 10px 10px 10px;
+}
+
+.avatar {
+
+}
+
+.avatar img {
+    height: 40px;
+    width: 40px;
+    border-radius: 20px;
+}
+
+.friendName {
+    margin: 5px;
+    font-size: 12px;
+    color: white;
+}
