@@ -1,18 +1,18 @@
 import {v1} from 'uuid'
 
 export type PostType = {
-    id: number
+    id: string
     message: string
     likes: number
 }
 
 export type DialogsItemType = {
-    id: number
+    id: string
     name: string
 }
 
 export type MessageType = {
-    id: number
+    id: string
     message: string
 }
 
@@ -42,24 +42,24 @@ export type RootStateType = {
 
 let state: RootStateType = {
     profilePage: {posts: [
-            {id: 1, message: "Hi, how a you?", likes: 25},
-            {id: 2, message: "It's my first post", likes: 15},
-            {id: 3, message: "Yo", likes: 33},
+            {id: v1(), message: "Hi, how a you?", likes: 25},
+            {id: v1(), message: "It's my first post", likes: 15},
+            {id: v1(), message: "Yo", likes: 33},
         ],},
     dialogsPage: {
         dialogs: [
-            {id: 1, name: "Saveliy"},
-            {id: 2, name: "Dima"},
-            {id: 3, name: "Egor"},
-            {id: 4, name: "Artem"},
-            {id: 5, name: "Vano"},
+            {id: v1(), name: "Saveliy"},
+            {id: v1(), name: "Dima"},
+            {id: v1(), name: "Egor"},
+            {id: v1(), name: "Artem"},
+            {id: v1(), name: "Vano"},
         ],
         messages: [
-            {id: 1, message: "Yo"},
-            {id: 2, message: "How are you?"},
-            {id: 3, message: "Hello"},
-            {id: 4, message: "Nice project"},
-            {id: 5, message: "What am I doing here?"},
+            {id: v1(), message: "Yo"},
+            {id: v1(), message: "How are you?"},
+            {id: v1(), message: "Hello"},
+            {id: v1(), message: "Nice project"},
+            {id: v1(), message: "What am I doing here?"},
         ],
     },
     sidebar: {
