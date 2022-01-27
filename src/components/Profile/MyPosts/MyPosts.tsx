@@ -3,7 +3,10 @@ import s from './MyPosts.module.css'
 import {PostType, ProfilePageType} from "../../../redux/state";
 import Post from "./Post/Post";
 
-export type MyPostsPropsType = ProfilePageType
+export type MyPostsPropsType = ProfilePageType & {
+    addPostCallBack: (postText: string) => void
+    changeTextarea: () => void
+}
 
 const MyPosts = (props: MyPostsPropsType) => {
 
@@ -13,8 +16,15 @@ const MyPosts = (props: MyPostsPropsType) => {
 
     const newPostElement = React.createRef<HTMLTextAreaElement>();
 
+    const changeTextarea = () => {
+        props.changeTextarea()
+    }
+
     const addPost = () => {
-        alert(newPostElement.current?.value)
+        if(newPostElement.current) {
+            props.addPostCallBack(newPostElement.current.value)
+            newPostElement.current.value = ''
+        }
     }
 
     return (
@@ -26,7 +36,7 @@ const MyPosts = (props: MyPostsPropsType) => {
                 </div>
 
                 <div className={s.textareaWrapper}>
-                    <textarea ref={newPostElement} placeholder="your news..."></textarea>
+                    <textarea ref={newPostElement} onChange={changeTextarea} placeholder="your news..."></textarea>
                 </div>
 
                 <div className={s.buttonWrapper}>

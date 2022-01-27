@@ -1,4 +1,5 @@
 import {v1} from 'uuid'
+import {rerenderEntireTree} from "../render";
 
 export type PostType = {
     id: string
@@ -40,7 +41,7 @@ export type RootStateType = {
     sidebar: SidebarType
 }
 
-let state: RootStateType = {
+const state: RootStateType = {
     profilePage: {posts: [
             {id: v1(), message: "Hi, how a you?", likes: 25},
             {id: v1(), message: "It's my first post", likes: 15},
@@ -69,6 +70,20 @@ let state: RootStateType = {
             {id: v1(), name: "Vanya"},
         ]
     }
+}
+
+export const changeTextarea = () => {
+    rerenderEntireTree(state)
+}
+
+export const addPost = (postMessage: string) => {
+    const newPost: PostType = {
+        id: v1(),
+        message: postMessage,
+        likes: 0
+    }
+    state.profilePage.posts.push(newPost)
+    rerenderEntireTree(state)
 }
 
 export default state
