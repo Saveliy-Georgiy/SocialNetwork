@@ -13,6 +13,8 @@ type AppPropsType = {
     changeTextarea: () => void
 }
 
+
+
 const App = (props: AppPropsType) => {
     return (
         <div className="appWrapper">
