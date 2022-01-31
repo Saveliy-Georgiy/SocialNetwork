@@ -4,8 +4,8 @@ import {PostType, ProfilePageType} from "../../../redux/state";
 import Post from "./Post/Post";
 
 export type MyPostsPropsType = ProfilePageType & {
-    addPost: (postText: string) => void
-    changeTextarea: () => void
+    addPost: () => void
+    changeTextarea: (newPostText: string) => void
 }
 
 const MyPosts = (props: MyPostsPropsType) => {
@@ -17,14 +17,11 @@ const MyPosts = (props: MyPostsPropsType) => {
     const newPostElement = React.createRef<HTMLTextAreaElement>();
 
     const changeTextarea = () => {
-        props.changeTextarea()
-    }
+        (newPostElement.current) && props.changeTextarea(newPostElement.current.value)
+        }
 
     const addPost = () => {
-        if(newPostElement.current) {
-            props.addPost(newPostElement.current.value)
-            newPostElement.current.value = ''
-        }
+        (newPostElement.current) && props.addPost()
     }
 
     return (
@@ -36,7 +33,7 @@ const MyPosts = (props: MyPostsPropsType) => {
                 </div>
 
                 <div className={s.textareaWrapper}>
-                    <textarea ref={newPostElement} onChange={changeTextarea} placeholder="your news..."></textarea>
+                    <textarea ref={newPostElement} value={props.newPostText} onChange={changeTextarea} placeholder="your news..."/>
                 </div>
 
                 <div className={s.buttonWrapper}>

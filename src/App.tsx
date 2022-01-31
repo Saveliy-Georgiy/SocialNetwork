@@ -9,8 +9,8 @@ import {RootStateType} from "./redux/state";
 
 type AppPropsType = {
     appState: RootStateType
-    addPost: (postText: string) => void
-    changeTextarea: () => void
+    addPost: () => void
+    changeTextarea: (newPostText: string) => void
 }
 
 
@@ -26,6 +26,7 @@ const App = (props: AppPropsType) => {
                            element={
                                <Profile
                                    posts={props.appState.profilePage.posts}
+                                   newPostText={props.appState.profilePage.newPostText}
                                    changeTextarea={props.changeTextarea}
                                    addPost={props.addPost}/>}/>
                     <Route path="/dialogs"
