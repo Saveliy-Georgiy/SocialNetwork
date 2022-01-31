@@ -9,7 +9,7 @@ import {RootStateType} from "./redux/state";
 
 type AppPropsType = {
     appState: RootStateType
-    addPostCallBack: (postText: string) => void
+    addPost: (postText: string) => void
     changeTextarea: () => void
 }
 
@@ -27,7 +27,7 @@ const App = (props: AppPropsType) => {
                                <Profile
                                    posts={props.appState.profilePage.posts}
                                    changeTextarea={props.changeTextarea}
-                                   addPostCallBack={props.addPostCallBack}/>}/>
+                                   addPost={props.addPost}/>}/>
                     <Route path="/dialogs"
                            element={
                                <Dialogs

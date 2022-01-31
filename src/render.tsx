@@ -8,7 +8,7 @@ export const rerenderEntireTree = (state: RootStateType) => {
     ReactDOM.render(
         <React.StrictMode>
             <HashRouter>
-                <App appState={state} addPostCallBack={addPost} changeTextarea={changeTextarea}/>
+                <App appState={state} addPost={addPost} changeTextarea={changeTextarea}/>
             </HashRouter>
         </React.StrictMode>,
         document.getElementById('root')

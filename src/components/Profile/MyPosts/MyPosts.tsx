@@ -4,7 +4,7 @@ import {PostType, ProfilePageType} from "../../../redux/state";
 import Post from "./Post/Post";
 
 export type MyPostsPropsType = ProfilePageType & {
-    addPostCallBack: (postText: string) => void
+    addPost: (postText: string) => void
     changeTextarea: () => void
 }
 
@@ -22,7 +22,7 @@ const MyPosts = (props: MyPostsPropsType) => {
 
     const addPost = () => {
         if(newPostElement.current) {
-            props.addPostCallBack(newPostElement.current.value)
+            props.addPost(newPostElement.current.value)
             newPostElement.current.value = ''
         }
     }
