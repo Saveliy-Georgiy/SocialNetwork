@@ -5,35 +5,36 @@ import Header from "./components/Header/Header";
 import Navbar from "./components/Navbar/Navbar";
 import Profile from "./components/Profile/Profile";
 import {Route, Routes} from "react-router-dom";
-import {RootStateType} from "./redux/state";
+import {StoreType} from "./redux/state";
 
 type AppPropsType = {
-    appState: RootStateType
+    store: StoreType
     addPost: () => void
     changeTextarea: (newPostText: string) => void
 }
 
-
-
 const App = (props: AppPropsType) => {
+
+    const state = props.store.getState()
+
     return (
         <div className="appWrapper">
             <Header/>
-            <Navbar friends={props.appState.sidebar.friends}/>
+            <Navbar friends={state.sidebar.friends}/>
             <div className="appWrapperContent">
                 <Routes>
                     <Route path="/profile"
                            element={
                                <Profile
-                                   posts={props.appState.profilePage.posts}
-                                   newPostText={props.appState.profilePage.newPostText}
+                                   posts={state.profilePage.posts}
+                                   newPostText={state.profilePage.newPostText}
                                    changeTextarea={props.changeTextarea}
                                    addPost={props.addPost}/>}/>
                     <Route path="/dialogs"
                            element={
                                <Dialogs
-                                   dialogs={props.appState.dialogsPage.dialogs}
-                                   messages={props.appState.dialogsPage.messages}/>}/>
+                                   dialogs={state.dialogsPage.dialogs}
+                                   messages={state.dialogsPage.messages}/>}/>
                 </Routes>
             </div>
         </div>

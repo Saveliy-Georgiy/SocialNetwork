@@ -1,16 +1,16 @@
 import reportWebVitals from './reportWebVitals';
-import state, {subscribe} from "./redux/state";
 import React from 'react';
 import ReactDOM from 'react-dom';
 import App from './App';
 import {HashRouter} from 'react-router-dom';
-import {addPost, changeTextarea} from "./redux/state";
+import store from "./redux/state";
+
 
 const renderEntireTree = () => {
     ReactDOM.render(
         <React.StrictMode>
             <HashRouter>
-                <App appState={state} addPost={addPost} changeTextarea={changeTextarea}/>
+                <App store={store} addPost={store.addPost.bind(store)} changeTextarea={store.changeTextarea.bind(store)}/>
             </HashRouter>
         </React.StrictMode>,
         document.getElementById('root')
@@ -19,7 +19,7 @@ const renderEntireTree = () => {
 
 renderEntireTree()
 
-subscribe(renderEntireTree)
+store.subscribe(renderEntireTree)
 
 // If you want to start measuring performance in your app, pass a function
 // to log results (for example: reportWebVitals(console.log))
