@@ -1,6 +1,12 @@
 import React from 'react';
 import s from './MyPosts.module.css'
-import {ActionsTypes, PostType, ProfilePageType} from "../../../redux/state";
+import {
+    ActionsTypes,
+    addPostAC,
+    PostType,
+    ProfilePageType,
+    UpdateNewPostTextAC,
+} from "../../../redux/state";
 import Post from "./Post/Post";
 
 export type MyPostsPropsType = ProfilePageType & {
@@ -16,11 +22,11 @@ const MyPosts = (props: MyPostsPropsType) => {
     const newPostElement = React.createRef<HTMLTextAreaElement>();
 
     const changeTextarea = () => {
-        (newPostElement.current) && props.dispatch({type: 'UPDATE-NEW-POST-TEXT',newText: newPostElement.current.value})
+        (newPostElement.current) && props.dispatch(UpdateNewPostTextAC(newPostElement.current.value))
         }
 
     const addPost = () => {
-        (newPostElement.current) && props.dispatch({type: 'ADD-POST'})
+        (newPostElement.current) && props.dispatch(addPostAC())
     }
 
     return (
