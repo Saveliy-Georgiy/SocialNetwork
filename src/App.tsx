@@ -32,7 +32,9 @@ const App = (props: AppPropsType) => {
                            element={
                                <Dialogs
                                    dialogs={state.dialogsPage.dialogs}
-                                   messages={state.dialogsPage.messages}/>}/>
+                                   messages={state.dialogsPage.messages}
+                                   newMessageBody={state.dialogsPage.newMessageBody}
+                                   dispatch={props.dispatch}/>}/>
                 </Routes>
             </div>
         </div>

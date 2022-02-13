@@ -24,6 +24,7 @@ export type ProfilePageType = {
 export type DialogPageType = {
     dialogs: Array<DialogsItemType>
     messages: Array<MessageType>
+    newMessageBody: string
 }
 
 export type FriendsType = {
@@ -41,7 +42,11 @@ export type RootStateType = {
     sidebar: SidebarType
 }
 
-export type ActionsTypes = ReturnType<typeof addPostAC> | ReturnType<typeof UpdateNewPostTextAC>
+export type ActionsTypes =
+    ReturnType<typeof addPostAC>
+    | ReturnType<typeof updateNewPostTextAC>
+    | ReturnType<typeof updateNewMessageBodyAC>
+    | ReturnType<typeof sendMessageAC>
 
 export type StoreType = {
     _state: RootStateType
@@ -53,6 +58,8 @@ export type StoreType = {
 
 const ADD_POST = 'ADD-POST';
 const UPDATE_NEW_POST_TEXT = 'UPDATE-NEW-POST-TEXT';
+const UPDATE_NEW_MESSAGE_BODY = 'UPDATE-NEW-MESSAGE-BODY';
+const SEND_MESSAGE = 'SEND_MESSAGE';
 
 const store: StoreType = {
     _state: {
@@ -79,6 +86,7 @@ const store: StoreType = {
                 {id: v1(), message: "Nice project"},
                 {id: v1(), message: "What am I doing here?"},
             ],
+            newMessageBody: ""
         },
         sidebar: {
             friends: [
@@ -110,8 +118,15 @@ const store: StoreType = {
         } else if (action.type === 'UPDATE-NEW-POST-TEXT') {
             this._state.profilePage.newPostText = action.newText
             this._callSubscriber()
+        } else if (action.type === 'UPDATE-NEW-MESSAGE-BODY') {
+            this._state.dialogsPage.newMessageBody = action.body
+            this._callSubscriber()
+        } else if (action.type === 'SEND_MESSAGE') {
+            const newMessage = this._state.dialogsPage.newMessageBody
+            this._state.dialogsPage.newMessageBody = ""
+            this._state.dialogsPage.messages.push({id: v1(), message: newMessage})
+            this._callSubscriber()
         }
-
     }
 }
 
@@ -121,12 +136,24 @@ export const addPostAC = () => {
     } as const
 }
 
-export const UpdateNewPostTextAC = (newText: string) => {
+export const updateNewPostTextAC = (newText: string) => {
     return {
         type: UPDATE_NEW_POST_TEXT,
         newText: newText
     } as const
+}
 
+export const updateNewMessageBodyAC = (body: string) => {
+    return {
+        type: UPDATE_NEW_MESSAGE_BODY,
+        body: body
+    } as const
+}
+
+export const sendMessageAC = () => {
+    return {
+        type: SEND_MESSAGE,
+    } as const
 }
 
 export default store

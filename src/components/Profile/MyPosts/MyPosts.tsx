@@ -4,8 +4,7 @@ import {
     ActionsTypes,
     addPostAC,
     PostType,
-    ProfilePageType,
-    UpdateNewPostTextAC,
+    ProfilePageType, updateNewPostTextAC,
 } from "../../../redux/state";
 import Post from "./Post/Post";
 
@@ -22,7 +21,7 @@ const MyPosts = (props: MyPostsPropsType) => {
     const newPostElement = React.createRef<HTMLTextAreaElement>();
 
     const changeTextarea = () => {
-        (newPostElement.current) && props.dispatch(UpdateNewPostTextAC(newPostElement.current.value))
+        (newPostElement.current) && props.dispatch(updateNewPostTextAC(newPostElement.current.value))
         }
 
     const addPost = () => {
