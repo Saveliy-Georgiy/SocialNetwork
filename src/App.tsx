@@ -5,12 +5,11 @@ import Header from "./components/Header/Header";
 import Navbar from "./components/Navbar/Navbar";
 import Profile from "./components/Profile/Profile";
 import {Route, Routes} from "react-router-dom";
-import {StoreType} from "./redux/state";
+import {ActionsTypes, StoreType} from "./redux/state";
 
 type AppPropsType = {
     store: StoreType
-    addPost: () => void
-    changeTextarea: (newPostText: string) => void
+    dispatch: (action: ActionsTypes) => void
 }
 
 const App = (props: AppPropsType) => {
@@ -28,8 +27,7 @@ const App = (props: AppPropsType) => {
                                <Profile
                                    posts={state.profilePage.posts}
                                    newPostText={state.profilePage.newPostText}
-                                   changeTextarea={props.changeTextarea}
-                                   addPost={props.addPost}/>}/>
+                                   dispatch={props.dispatch}/>}/>
                     <Route path="/dialogs"
                            element={
                                <Dialogs

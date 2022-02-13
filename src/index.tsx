@@ -10,7 +10,7 @@ const renderEntireTree = () => {
     ReactDOM.render(
         <React.StrictMode>
             <HashRouter>
-                <App store={store} addPost={store.addPost.bind(store)} changeTextarea={store.changeTextarea.bind(store)}/>
+                <App store={store} dispatch={store.dispatch.bind(store)}/>
             </HashRouter>
         </React.StrictMode>,
         document.getElementById('root')

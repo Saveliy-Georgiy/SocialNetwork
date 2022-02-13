@@ -41,14 +41,25 @@ export type RootStateType = {
     sidebar: SidebarType
 }
 
+type AddPostActionType = {
+    type: 'ADD-POST'
+}
+
+type UpdateNewPostTextActionType = {
+    type: 'UPDATE-NEW-POST-TEXT',
+    newText: string
+}
+
+export type ActionsTypes = AddPostActionType | UpdateNewPostTextActionType
+
 export type StoreType = {
     _state: RootStateType
     getState: () => RootStateType
     _callSubscriber: () => void
-    changeTextarea: (newText: string) => void
-    addPost: () => void
     subscribe: (observer: () => void) => void
+    dispatch: (action: ActionsTypes) => void
 }
+
 const store: StoreType = {
     _state: {
         profilePage: {
@@ -86,85 +97,29 @@ const store: StoreType = {
     getState() {
         return this._state
     },
-    _callSubscriber () {
+    _callSubscriber() {
         console.log("state changed")
     },
-    changeTextarea (newText: string) {
-        this._state.profilePage.newPostText = newText
-        this._callSubscriber()
-    },
-    addPost () {
-        const newPost: PostType = {
-            id: v1(),
-            message: this._state.profilePage.newPostText,
-            likes: 0
-        }
-        this._state.profilePage.posts.push(newPost)
-        this._state.profilePage.newPostText = ""
-        this._callSubscriber()
-    },
-    subscribe (observer: () => void) {
+    subscribe(observer: () => void) {
         this._callSubscriber = observer
-    }
+    },
+    dispatch(action) {
+        if (action.type === 'ADD-POST') {
+            const newPost: PostType = {
+                id: v1(),
+                message: this._state.profilePage.newPostText,
+                likes: 0
+            }
+            this._state.profilePage.posts.push(newPost)
+            this._state.profilePage.newPostText = ""
+            this._callSubscriber()
+        } else if (action.type === 'UPDATE-NEW-POST-TEXT') {
+            this._state.profilePage.newPostText = action.newText
+            this._callSubscriber()
+        }
 
+    }
 }
 
-/*let renderEntireTree = () => {
-    console.log("hello")
-}*/
-
-/*const state: RootStateType = {
-    profilePage: {
-        posts: [
-            {id: v1(), message: "Hi, how a you?", likes: 25},
-            {id: v1(), message: "It's my first post", likes: 15},
-            {id: v1(), message: "Yo", likes: 33},
-        ],
-        newPostText: 'it-kamasutra.com'
-    },
-    dialogsPage: {
-        dialogs: [
-            {id: v1(), name: "Saveliy"},
-            {id: v1(), name: "Dima"},
-            {id: v1(), name: "Egor"},
-            {id: v1(), name: "Artem"},
-            {id: v1(), name: "Vano"},
-        ],
-        messages: [
-            {id: v1(), message: "Yo"},
-            {id: v1(), message: "How are you?"},
-            {id: v1(), message: "Hello"},
-            {id: v1(), message: "Nice project"},
-            {id: v1(), message: "What am I doing here?"},
-        ],
-    },
-    sidebar: {
-        friends: [
-            {id: v1(), name: "Dima"},
-            {id: v1(), name: "Egor"},
-            {id: v1(), name: "Vanya"},
-        ]
-    }
-}*/
-/*
-export const changeTextarea = (newText: string) => {
-    state.profilePage.newPostText = newText
-    renderEntireTree()
-}*/
-
-/*export const addPost = () => {
-    const newPost: PostType = {
-        id: v1(),
-        message: state.profilePage.newPostText,
-        likes: 0
-    }
-    state.profilePage.posts.push(newPost)
-    state.profilePage.newPostText = ""
-    renderEntireTree()
-}*/
-/*
-export const subscribe = (observer: () => void) => {
-    renderEntireTree = observer
-}*/
 
 export default store
