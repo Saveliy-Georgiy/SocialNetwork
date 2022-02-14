@@ -1,6 +1,5 @@
 import React, {ChangeEvent} from 'react';
 import s from './Dialogs.module.css';
-import {NavLink} from "react-router-dom";
 import DialogsItem from "./DialogsItem/DialogsItem";
 import Message from "./Message/Message";
 import {
@@ -8,9 +7,8 @@ import {
     DialogPageType,
     DialogsItemType,
     MessageType,
-    sendMessageAC,
-    updateNewMessageBodyAC
 } from "../../redux/state";
+import {sendMessageAC, updateNewMessageBodyAC} from "../../redux/dialogsReducer";
 
 type DialogsPropsType = DialogPageType & {
     dispatch: (action: ActionsTypes) => void
