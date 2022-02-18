@@ -5,15 +5,15 @@ import Header from "./components/Header/Header";
 import Navbar from "./components/Navbar/Navbar";
 import Profile from "./components/Profile/Profile";
 import {Route, Routes} from "react-router-dom";
-import {ActionsTypes, StoreType} from "./redux/state";
+import {StoreType} from "./redux/redux-store";
+import {ActionsTypes} from "./redux/store";
 
 type AppPropsType = {
-    store: StoreType
+    store: StoreType,
     dispatch: (action: ActionsTypes) => void
 }
 
 const App = (props: AppPropsType) => {
-
     const state = props.store.getState()
 
     return (
