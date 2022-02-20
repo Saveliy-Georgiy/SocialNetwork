@@ -1,15 +1,14 @@
 import React from 'react';
 import s from './MyPosts.module.css'
 import {
-    ActionsTypes,
     PostType,
     ProfilePageType,
 } from "../../../redux/store";
 import Post from "./Post/Post";
-import {addPostAC, updateNewPostTextAC} from "../../../redux/profileReducer";
 
 export type MyPostsPropsType = ProfilePageType & {
-    dispatch: (action: ActionsTypes) => void
+    updateNewPostText: (text: string) => void
+    addPost: () => void
 }
 
 const MyPosts = (props: MyPostsPropsType) => {
@@ -21,11 +20,11 @@ const MyPosts = (props: MyPostsPropsType) => {
     const newPostElement = React.createRef<HTMLTextAreaElement>();
 
     const changeTextarea = () => {
-        (newPostElement.current) && props.dispatch(updateNewPostTextAC(newPostElement.current.value))
+        (newPostElement.current) && props.updateNewPostText(newPostElement.current.value)
         }
 
-    const addPost = () => {
-        (newPostElement.current) && props.dispatch(addPostAC())
+    const onAddPost = () => {
+        (newPostElement.current) && props.addPost()
     }
 
     return (
@@ -41,7 +40,7 @@ const MyPosts = (props: MyPostsPropsType) => {
                 </div>
 
                 <div className={s.buttonWrapper}>
-                    <button onClick={addPost}>Add post</button>
+                    <button onClick={onAddPost}>Add post</button>
                 </div>
 
             </div>

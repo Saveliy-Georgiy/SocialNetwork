@@ -7,6 +7,7 @@ import Profile from "./components/Profile/Profile";
 import {Route, Routes} from "react-router-dom";
 import {StoreType} from "./redux/redux-store";
 import {ActionsTypes} from "./redux/store";
+import DialogsContainer from "./components/Dialogs/DialogsContainer";
 
 type AppPropsType = {
     store: StoreType,
@@ -23,18 +24,9 @@ const App = (props: AppPropsType) => {
             <div className="appWrapperContent">
                 <Routes>
                     <Route path="/profile"
-                           element={
-                               <Profile
-                                   posts={state.profilePage.posts}
-                                   newPostText={state.profilePage.newPostText}
-                                   dispatch={props.dispatch}/>}/>
+                           element={<Profile store={props.store}/>}/>
                     <Route path="/dialogs"
-                           element={
-                               <Dialogs
-                                   dialogs={state.dialogsPage.dialogs}
-                                   messages={state.dialogsPage.messages}
-                                   newMessageBody={state.dialogsPage.newMessageBody}
-                                   dispatch={props.dispatch}/>}/>
+                           element={<DialogsContainer store={props.store}/>}/>
                 </Routes>
             </div>
         </div>
