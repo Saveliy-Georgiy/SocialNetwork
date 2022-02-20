@@ -4,13 +4,16 @@ import ReactDOM from 'react-dom';
 import App from './App';
 import {HashRouter} from 'react-router-dom';
 import store from "./redux/redux-store";
+import {Provider} from './StoreContext';
 
 
 const renderEntireTree = () => {
     ReactDOM.render(
         <React.StrictMode>
             <HashRouter>
-                <App store={store} dispatch={store.dispatch.bind(store)}/>
+                <Provider store={store}>
+                    <App/>
+                </Provider>
             </HashRouter>
         </React.StrictMode>,
         document.getElementById('root')

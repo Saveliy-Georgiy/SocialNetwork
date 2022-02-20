@@ -21,7 +21,7 @@ const MyPosts = (props: MyPostsPropsType) => {
 
     const changeTextarea = () => {
         (newPostElement.current) && props.updateNewPostText(newPostElement.current.value)
-        }
+    }
 
     const onAddPost = () => {
         (newPostElement.current) && props.addPost()
@@ -30,19 +30,17 @@ const MyPosts = (props: MyPostsPropsType) => {
     return (
         <div className={s.postsBlock}>
             <div className={s.newPosts}>
-
                 <div className={s.header}>
                     My posts
                 </div>
-
                 <div className={s.textareaWrapper}>
-                    <textarea ref={newPostElement} value={props.newPostText} onChange={changeTextarea} placeholder="your news..."/>
+                    <textarea ref={newPostElement} value={props.newPostText} onChange={changeTextarea}
+                              placeholder="your news..."/>
                 </div>
 
                 <div className={s.buttonWrapper}>
                     <button onClick={onAddPost}>Add post</button>
                 </div>
-
             </div>
             <div className={s.posts}>
                 {postsElements}

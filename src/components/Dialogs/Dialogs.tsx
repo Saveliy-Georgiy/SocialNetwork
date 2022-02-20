@@ -13,13 +13,13 @@ type DialogsPropsType = DialogPageType & {
     updateNewMessageBody: (body: string) => void
 }
 
-const Dialogs = (props: any) => {
+const Dialogs = (props: DialogsPropsType) => {
 
-    const dialogsItem = props.dialogsPage.dialogs.map((d: DialogsItemType) =>
+    const dialogsItem = props.dialogs.map((d: DialogsItemType) =>
         <DialogsItem key={d.id} id={d.id} name={d.name}/>
     )
 
-    const messagesItem = props.dialogsPage.messages.map((m: MessageType) =>
+    const messagesItem = props.messages.map((m: MessageType) =>
         <Message key={m.id} id={m.id} message={m.message}/>
     )
 
@@ -32,7 +32,6 @@ const Dialogs = (props: any) => {
     }
 
     return (
-
         <div className={s.dialogs}>
             <div className={s.dialogsItems}>
                 <div>DIALOGS</div>
@@ -41,7 +40,7 @@ const Dialogs = (props: any) => {
             <div className={s.messages}>
                 {messagesItem}
             </div>
-            <div><textarea value={props.dialogsPage.newMessageBody} onChange={onNewMessageChange} placeholder="Enter your message"/>
+            <div><textarea value={props.newMessageBody} onChange={onNewMessageChange} placeholder="Enter your message"/>
             </div>
             <div>
                 <button onClick={onSendMessageClick}>Send</button>
