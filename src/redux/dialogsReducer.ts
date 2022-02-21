@@ -1,8 +1,8 @@
 import {v1} from "uuid";
 import {ActionsTypes} from "./store";
 
-const UPDATE_NEW_MESSAGE_BODY = 'UPDATE-NEW-MESSAGE-BODY';
-const SEND_MESSAGE = 'SEND-MESSAGE';
+export const UPDATE_NEW_MESSAGE_BODY = 'UPDATE-NEW-MESSAGE-BODY';
+export const SEND_MESSAGE = 'SEND-MESSAGE';
 
 const initialState = {
     dialogs: [
@@ -22,7 +22,7 @@ const initialState = {
     newMessageBody: ""
 }
 
-const dialogsReducer = (state = initialState, action: ActionsTypes): typeof initialState => {
+export const dialogsReducer = (state = initialState, action: ActionsTypes): typeof initialState => {
     switch (action.type) {
         case UPDATE_NEW_MESSAGE_BODY:
             state.newMessageBody = action.body
