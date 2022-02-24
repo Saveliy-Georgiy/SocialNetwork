@@ -1,6 +1,5 @@
 import {v1} from "uuid";
-import {DialogPageType} from "./store";
-import dialogsReducer, {SEND_MESSAGE, UPDATE_NEW_MESSAGE_BODY} from "./dialogsReducer";
+import dialogsReducer, {DialogPageType, SEND_MESSAGE, UPDATE_NEW_MESSAGE_BODY} from "./dialogsReducer";
 const initialState: DialogPageType = {
     dialogs: [
         {id: v1(), name: "Saveliy"},

@@ -1,6 +1,5 @@
 import {v1} from "uuid";
-import profileReducer, {ADD_POST, UPDATE_NEW_POST_TEXT} from "./profileReducer";
-import {DialogPageType, ProfilePageType} from "./store";
+import profileReducer, {ADD_POST, ProfilePageType, UPDATE_NEW_POST_TEXT} from "./profileReducer";
 
 test("reducer should be add post", () => {
     const initialState: ProfilePageType = {

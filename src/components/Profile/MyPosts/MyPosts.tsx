@@ -1,19 +1,12 @@
 import React from 'react';
 import s from './MyPosts.module.css'
-import {
-    PostType,
-    ProfilePageType,
-} from "../../../redux/store";
 import Post from "./Post/Post";
-
-export type MyPostsPropsType = ProfilePageType & {
-    updateNewPostText: (text: string) => void
-    addPost: () => void
-}
+import {MyPostsPropsType} from "./MyPostsContainer";
+import {PostType} from '../../../redux/profileReducer';
 
 const MyPosts = (props: MyPostsPropsType) => {
 
-    const postsElements = props.posts.map((m: PostType) =>
+    const postsElements = props.profilePage.posts.map((m: PostType) =>
         <Post key={m.id} id={m.id} message={m.message} likes={m.likes}/>
     )
 
@@ -34,7 +27,7 @@ const MyPosts = (props: MyPostsPropsType) => {
                     My posts
                 </div>
                 <div className={s.textareaWrapper}>
-                    <textarea ref={newPostElement} value={props.newPostText} onChange={changeTextarea}
+                    <textarea ref={newPostElement} value={props.profilePage.newPostText} onChange={changeTextarea}
                               placeholder="your news..."/>
                 </div>
 
@@ -48,5 +41,6 @@ const MyPosts = (props: MyPostsPropsType) => {
         </div>
     );
 };
+
 
 export default MyPosts;

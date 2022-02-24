@@ -1,5 +1,5 @@
 import React from 'react';
-import { FriendsType } from '../../../../redux/store';
+import { FriendsType } from '../../../../redux/sidebarReducer';
 import s from './Friend.module.css'
 
 type FriendsPropsType = FriendsType

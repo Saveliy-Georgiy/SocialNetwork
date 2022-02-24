@@ -1,30 +1,38 @@
 import React from 'react';
-import {sendMessageAC, updateNewMessageBodyAC} from "../../redux/dialogsReducer";
-import StoreContext from '../../StoreContext';
+import {connect} from 'react-redux';
+import {DialogPageType, sendMessageAC, updateNewMessageBodyAC} from "../../redux/dialogsReducer";
 import Dialogs from './Dialogs';
+import {AppStateType} from "../../redux/redux-store";
+import {Dispatch} from "redux";
 
-const DialogsContainer = () => {
+type MapStatePropsType = {
+    dialogsPage: DialogPageType
+}
 
-    return <StoreContext.Consumer>
-        {
-            (store) => {
-                const state = store.getState()
+type MapDispatchPropsType = {
+    updateNewMessageBody: (body: string) => void
+    sendMessage: () => void
+}
 
-                const onSendMessageClick = () => {
-                    store.dispatch(sendMessageAC())
-                }
+export type DialogsPropsType = MapStatePropsType & MapDispatchPropsType
 
-                const onNewMessageChange = (body: string) => {
-                    store.dispatch(updateNewMessageBodyAC(body))
-                }
-                return <Dialogs sendMessage={onSendMessageClick}
-                                updateNewMessageBody={onNewMessageChange}
-                                dialogs={state.dialogsPage.dialogs}
-                                messages={state.dialogsPage.messages}
-                                newMessageBody={state.dialogsPage.newMessageBody}/>
-            }
+const mapStateToProps = (state: AppStateType): MapStatePropsType => {
+    return {
+        dialogsPage: state.dialogsPage
+    }
+}
+
+const mapDispatchToProps = (dispatch: Dispatch): MapDispatchPropsType => {
+    return {
+        updateNewMessageBody: (body: string) => {
+            dispatch(updateNewMessageBodyAC(body))
+        },
+        sendMessage: () => {
+            dispatch(sendMessageAC())
         }
-    </StoreContext.Consumer>
-};
+    }
+}
+
+const DialogsContainer = connect(mapStateToProps, mapDispatchToProps)(Dialogs)
 
 export default DialogsContainer;
