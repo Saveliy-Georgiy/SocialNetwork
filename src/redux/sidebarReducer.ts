@@ -1,5 +1,8 @@
-import {ActionsTypes} from "./ActionTypes";
 import {v1} from "uuid";
+
+type ActionsTypes = {
+
+}
 
 export type FriendsType = {
     id: string

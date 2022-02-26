@@ -1,8 +1,9 @@
 import {v1} from "uuid";
-import {ActionsTypes} from "./ActionTypes";
 
 export const UPDATE_NEW_MESSAGE_BODY = 'UPDATE-NEW-MESSAGE-BODY';
 export const SEND_MESSAGE = 'SEND-MESSAGE';
+
+export type ActionsTypes = ReturnType<typeof updateNewMessageBodyAC> | ReturnType<typeof sendMessageAC>
 
 export type DialogsItemType = {
     id: string

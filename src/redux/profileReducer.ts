@@ -1,8 +1,9 @@
 import {v1} from "uuid";
-import {ActionsTypes} from "./ActionTypes";
 
 export const ADD_POST = 'ADD-POST';
 export const UPDATE_NEW_POST_TEXT = 'UPDATE-NEW-POST-TEXT';
+
+export type ActionsTypes = ReturnType<typeof addPostAC> | ReturnType<typeof updateNewPostTextAC>
 
 export type PostType = {
     id: string
