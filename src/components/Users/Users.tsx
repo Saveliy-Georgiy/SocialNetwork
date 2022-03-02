@@ -1,44 +1,14 @@
 import React from 'react';
 import {UsersPropsType} from "./UsersContainer";
 import s from "./Users.module.css";
-import {v1} from "uuid";
+import axios from "axios";
 
 const Users = (props: UsersPropsType) => {
 
     if (props.usersPage.users.length === 0) {
-        props.setUsers([
-            {
-                id: v1(),
-                photoUrl: 'https://icon-library.com/images/avatar-icon/avatar-icon-6.jpg',
-                followed: true,
-                fullName: "Saveliy",
-                status: 'I am boss',
-                location: {city: "Minsk", country: "Belarus"}
-            },
-            {
-                id: v1(),
-                photoUrl: 'https://icon-library.com/images/avatar-icon/avatar-icon-6.jpg',
-                followed: false,
-                fullName: "Egor",
-                status: 'I am boss too',
-                location: {city: "Moskow", country: "Russia"}
-            },
-            {
-                id: v1(),
-                photoUrl: 'https://icon-library.com/images/avatar-icon/avatar-icon-6.jpg',
-                followed: false,
-                fullName: "Dima",
-                status: 'I am boss too',
-                location: {city: "Borisov", country: "Belarus"}
-            },
-            {
-                id: v1(),
-                photoUrl: 'https://icon-library.com/images/avatar-icon/avatar-icon-6.jpg',
-                followed: true,
-                fullName: "Vano",
-                status: 'I am boss too',
-                location: {city: "Grodno", country: "Belarus"}
-            },])
+        axios.get("https://social-network.samuraijs.com/api/1.0/users").then(response => {
+            props.setUsers(response.data.items)
+        })
     }
     return (
         <div>
@@ -48,7 +18,7 @@ const Users = (props: UsersPropsType) => {
                         <div className={s.imgWrapper}>
                             <div>
                                 <img className={s.photo}
-                                     src={'https://icon-library.com/images/avatar-icon/avatar-icon-6.jpg'} alt="photo"/>
+                                     src={u.photos.small !== null ? u.photos.small :'https://icon-library.com/images/avatar-icon/avatar-icon-6.jpg'} alt="photo"/>
                             </div>
                             <div className={s.buttonWrapper}>
                                 {u.followed ?
@@ -63,12 +33,12 @@ const Users = (props: UsersPropsType) => {
                         </div>
                         <div className={s.informationWrapper}>
                             <div className={s.message}>
-                                <div className={s.name}>{u.fullName}</div>
+                                <div className={s.name}>{u.name}</div>
                                 <div>{u.status}</div>
                             </div>
                             <div className={s.locationWrapper}>
-                                <div className={s.location}>{u.location.country},</div>
-                                <div className={s.location}>{u.location.city}</div>
+                                <div className={s.location}>{"u.location.country"},</div>
+                                <div className={s.location}>{"u.location.city"}</div>
                             </div>
                         </div>
                     </div>)
