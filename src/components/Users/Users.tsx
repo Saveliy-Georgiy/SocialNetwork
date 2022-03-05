@@ -4,13 +4,11 @@ import s from "./Users.module.css";
 import axios from "axios";
 
 class Users extends React.Component<UsersPropsType, {}> {
-    constructor(props: UsersPropsType) {
-        super(props);
-        if (props.usersPage.users.length === 0) {
-            axios.get("https://social-network.samuraijs.com/api/1.0/users").then(response => {
-                this.props.setUsers(response.data.items)
-            })
-        }
+
+    componentDidMount() {
+        axios.get("https://social-network.samuraijs.com/api/1.0/users").then(response => {
+            this.props.setUsers(response.data.items)
+        })
     }
 
     render() {
