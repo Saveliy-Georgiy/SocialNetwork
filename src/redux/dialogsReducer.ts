@@ -27,7 +27,7 @@ const initialState = {
         {id: v1(), message: "Yo"},
         {id: v1(), message: "How are you?"},
         {id: v1(), message: "Hello"},
-        {id: v1(), message: "Nice project"},
+        {id: v1(), message: "Nice project!"},
         {id: v1(), message: "What am I doing here?"},
     ] as Array<MessageType>,
     newMessageBody: ""
