@@ -1,4 +1,4 @@
-import React, {MouseEventHandler} from 'react';
+import React from 'react';
 import {UsersPropsType} from "./UsersContainer";
 import s from "./Users.module.css";
 import axios from "axios";
