@@ -23,15 +23,6 @@ const Users = (props: UsersType) => {
 
     return (
         <div>
-            <div>
-                {pages.map(p => {
-                    return <span
-                        className={props.currentPage === p ? s.selectedPage : ""}
-                        onClick={() => props.onPageChanged(p)}>
-                            {p}
-                        </span>
-                })}
-            </div>
             {
                 props.users.map(u =>
                     <div key={u.id} className={s.userWrapper}>
@@ -64,6 +55,15 @@ const Users = (props: UsersType) => {
                         </div>
                     </div>)
             }
+            <div className={s.paginator}>
+                {pages.map(p => {
+                    return <span
+                        className={props.currentPage === p ? s.selectedPage : s.simplePage}
+                        onClick={() => props.onPageChanged(p)}>
+                            {p}
+                        </span>
+                })}
+            </div>
         </div>
     );
 }
