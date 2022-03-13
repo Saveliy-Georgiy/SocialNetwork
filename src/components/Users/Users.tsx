@@ -29,7 +29,7 @@ const Users = (props: UsersType) => {
                     <div key={u.id} className={s.userWrapper}>
                         <div className={s.imgWrapper}>
                             <div>
-                                <NavLink to={'/profile' + u.id}>
+                                <NavLink to={'/profile/' + u.id}>
                                 <img className={s.photo}
                                      src={u.photos.small !== null ? u.photos.small : avatar}
                                      alt="photo"/>
