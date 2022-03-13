@@ -3,7 +3,7 @@ import s from "./Users.module.css";
 import {UserType} from "../../redux/usersReducer";
 
 type UsersType = {
-    totalUserCount: number
+    totalUsersCount: number
     pageSize: number
     currentPage: number
     users: Array<UserType>
@@ -14,7 +14,7 @@ type UsersType = {
 
 const Users = (props: UsersType) => {
 
-    let pagesCount = Math.ceil(props.totalUserCount / props.pageSize)
+    let pagesCount = Math.ceil(props.totalUsersCount / props.pageSize)
 
     let pages = [];
     for (let i = 1; i <= pagesCount; i++) {
