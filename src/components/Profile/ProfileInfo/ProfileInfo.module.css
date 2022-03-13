@@ -5,12 +5,13 @@
 }
 
 .background {
-height: 150px;
-width: 1000px;
+    height: 150px;
+    width: 1000px;
 }
 
-.avatar img{
+.avatar img {
     width: 100px;
+    height: 100px;
     padding-right: 30px;
 }
 

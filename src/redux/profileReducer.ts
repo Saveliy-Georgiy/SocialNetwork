@@ -2,13 +2,43 @@ import {v1} from "uuid";
 
 export const ADD_POST = 'ADD-POST';
 export const UPDATE_NEW_POST_TEXT = 'UPDATE-NEW-POST-TEXT';
+export const SET_USER_PROFILE = 'SET-USER-PROFILE';
 
-export type ActionsTypes = ReturnType<typeof addPostAC> | ReturnType<typeof updateNewPostTextAC>
+export type ActionsTypes =
+    ReturnType<typeof addPost>
+    | ReturnType<typeof updateNewPostText>
+    | ReturnType<typeof setUserProfile>
 
 export type PostType = {
     id: string
     message: string
     likes: number
+}
+
+type ContactsType = {
+    facebook: string
+    website: string
+    vk: string
+    twitter: string
+    instagram: string
+    youtube: string
+    github: string
+    mainLink: string
+}
+
+type PhotosType = {
+    small: string | null
+    large: string | null
+}
+
+export type ProfileType = {
+    aboutMe: string
+    contacts: ContactsType
+    lookingForAJob: true
+    lookingForAJobDescription: string
+    fullName: string
+    userId: number
+    photos: PhotosType
 }
 
 const initialState = {
@@ -17,7 +47,8 @@ const initialState = {
         {id: v1(), message: "It's my first post", likes: 15},
         {id: v1(), message: "Yo", likes: 33},
     ] as Array<PostType>,
-    newPostText: 'it-kamasutra.com'
+    newPostText: 'it-kamasutra.com',
+    profile: null as ProfileType | null,
 }
 
 export type ProfilePageType = typeof initialState
@@ -33,21 +64,30 @@ const profileReducer = (state = initialState, action: ActionsTypes): ProfilePage
             return {...state, posts: [...state.posts, newPost], newPostText: ""}
         case UPDATE_NEW_POST_TEXT:
             return {...state, newPostText: action.newText}
+        case SET_USER_PROFILE:
+            return {...state, profile: action.profile}
         default:
             return state
     }
 }
 
-export const addPostAC = () => {
+export const addPost = () => {
     return {
-        type: ADD_POST
+        type: ADD_POST,
     } as const
 }
 
-export const updateNewPostTextAC = (newText: string) => {
+export const updateNewPostText = (newText: string) => {
     return {
         type: UPDATE_NEW_POST_TEXT,
-        newText: newText
+        newText,
+    } as const
+}
+
+export const setUserProfile = (profile: any) => {
+    return {
+        type: SET_USER_PROFILE,
+        profile,
     } as const
 }
 

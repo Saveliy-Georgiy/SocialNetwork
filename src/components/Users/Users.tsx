@@ -1,7 +1,8 @@
 import React from 'react';
 import s from "./Users.module.css";
 import {UserType} from "../../redux/usersReducer";
-
+import { NavLink } from 'react-router-dom';
+import avatar from '../../images/avatar.jpg'
 type UsersType = {
     totalUsersCount: number
     pageSize: number
@@ -28,9 +29,11 @@ const Users = (props: UsersType) => {
                     <div key={u.id} className={s.userWrapper}>
                         <div className={s.imgWrapper}>
                             <div>
+                                <NavLink to={'/profile' + u.id}>
                                 <img className={s.photo}
-                                     src={u.photos.small !== null ? u.photos.small : 'https://icon-library.com/images/avatar-icon/avatar-icon-6.jpg'}
+                                     src={u.photos.small !== null ? u.photos.small : avatar}
                                      alt="photo"/>
+                                </NavLink>
                             </div>
                             <div className={s.buttonWrapper}>
                                 {u.followed ?
