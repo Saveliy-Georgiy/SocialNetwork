@@ -18,7 +18,7 @@ export type PhotoType = {
 }
 
 export type UserType = {
-    id: string
+    id: number
     photos: PhotoType
     followed: boolean
     name: string
@@ -39,9 +39,9 @@ export type UsersPageType = typeof initialState
 export const usersReducer = (state = initialState, action: ActionsTypes): UsersPageType => {
     switch (action.type) {
         case FOLLOW:
-            return {...state, users: state.users.map(u => u.id === action.userId ? {...u, followed: false} : u)}
+            return {...state, users: state.users.map(u => u.id === action.userId ? {...u, followed: !u.followed} : u)}
         case UNFOLLOW:
-            return {...state, users: state.users.map(u => u.id === action.userId ? {...u, followed: true} : u)}
+            return {...state, users: state.users.map(u => u.id === action.userId ? {...u, followed: !u.followed} : u)}
         case SET_USERS:
             return {...state, users: [/*...state.users,*/ ...action.users]}
         case SET_CURRENT_PAGE:
@@ -55,17 +55,19 @@ export const usersReducer = (state = initialState, action: ActionsTypes): UsersP
     }
 }
 
-export const follow = (userId: string) => {
+export const follow = (userId: number) => {
     return {
         type: FOLLOW,
         userId,
+        //followed: true,
     } as const
 }
 
-export const unfollow = (userId: string) => {
+export const unfollow = (userId: number) => {
     return {
         type: UNFOLLOW,
         userId,
+        //followed: false,
     } as const
 }
 
