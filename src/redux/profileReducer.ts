@@ -1,8 +1,8 @@
 import {v1} from "uuid";
 
-export const ADD_POST = 'ADD-POST';
-export const UPDATE_NEW_POST_TEXT = 'UPDATE-NEW-POST-TEXT';
-export const SET_USER_PROFILE = 'SET-USER-PROFILE';
+export const ADD_POST = 'ADD_POST';
+export const UPDATE_NEW_POST_TEXT = 'UPDATE_NEW_POST_TEXT';
+export const SET_USER_PROFILE = 'SET_USER_PROFILE';
 
 export type ActionsTypes =
     ReturnType<typeof addPost>

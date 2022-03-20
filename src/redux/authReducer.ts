@@ -1,4 +1,4 @@
-export const SET_USER_DATA = 'SET-USER-DATA';
+export const SET_USER_DATA = 'SET_USER_DATA';
 
 type ActionsTypes = ReturnType<typeof setAuthUserData>
 

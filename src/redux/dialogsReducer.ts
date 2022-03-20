@@ -1,7 +1,7 @@
 import {v1} from "uuid";
 
-export const UPDATE_NEW_MESSAGE_BODY = 'UPDATE-NEW-MESSAGE-BODY';
-export const SEND_MESSAGE = 'SEND-MESSAGE';
+export const UPDATE_NEW_MESSAGE_BODY = 'UPDATE_NEW_MESSAGE_BODY';
+export const SEND_MESSAGE = 'SEND_MESSAGE';
 
 export type ActionsTypes = ReturnType<typeof updateNewMessageBodyAC> | ReturnType<typeof sendMessageAC>
 

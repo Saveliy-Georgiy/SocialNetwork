@@ -1,9 +1,10 @@
 export const FOLLOW = 'FOLLOW';
 export const UNFOLLOW = 'UNFOLLOW';
-export const SET_USERS = 'SET-USERS';
-export const SET_CURRENT_PAGE = 'SET-CURRENT-PAGE';
-export const SET_TOTAL_USERS_COUNT = 'SET-TOTAL-USERS-COUNT';
+export const SET_USERS = 'SET_USERS';
+export const SET_CURRENT_PAGE = 'SET_CURRENT_PAGE';
+export const SET_TOTAL_USERS_COUNT = 'SET_TOTAL_USERS_COUNT';
 export const TOGGLE_IS_FETCHING = 'TOGGLE_IS_FETCHING';
+export const TOGGLE_IS_FOLLOWING_PROGRESS = 'TOGGLE_IS_FOLLOWING_PROGRESS';
 
 type ActionsTypes = ReturnType<typeof follow> | ReturnType<typeof unfollow> | ReturnType<typeof setUsers> | ReturnType<typeof setCurrentPage> | ReturnType<typeof setTotalUsersCount> | ReturnType<typeof toggleIsFetching>
 
@@ -31,7 +32,8 @@ const initialState = {
     pageSize: 5,
     totalUsersCount: 0,
     currentPage: 1,
-    isFetching: false
+    isFetching: false,
+    followingInProgress: false,
 }
 
 export type UsersPageType = typeof initialState
