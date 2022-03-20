@@ -34,6 +34,10 @@
     width: 70px;
 }
 
+.buttonWrapper button:disabled {
+    opacity: 70%;
+}
+
 .informationWrapper {
     display: flex;
     flex-direction: row;
