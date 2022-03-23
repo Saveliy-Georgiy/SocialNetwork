@@ -117,7 +117,6 @@ export const toggleFollowingProgress = (isFetching: boolean, userId: number) => 
         userId,
     } as const
 }
-
 export const getUsers = (currentPage: number, pageSize: number): AppThunk => {
     return (dispatch) => {
         dispatch(toggleIsFetching(true))
@@ -129,7 +128,6 @@ export const getUsers = (currentPage: number, pageSize: number): AppThunk => {
             })
     }
 }
-
 export const follow = (id: number): AppThunk => {
     return (dispatch) => {
         dispatch(toggleFollowingProgress(true, id))
@@ -142,7 +140,6 @@ export const follow = (id: number): AppThunk => {
             })
     }
 }
-
 export const unfollow = (id: number): AppThunk => {
     return (dispatch) => {
         dispatch(toggleFollowingProgress(true, id))
