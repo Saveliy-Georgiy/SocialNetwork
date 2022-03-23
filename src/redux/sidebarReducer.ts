@@ -1,6 +1,6 @@
 import {v1} from "uuid";
 
-type ActionsTypes = {
+export type SidebarActionsType = {
 
 }
 
@@ -18,7 +18,7 @@ const initialState = {
 }
 export type SidebarType = typeof initialState
 
-const sidebarReducer = (state = initialState, action: ActionsTypes): SidebarType => {
+const sidebarReducer = (state = initialState, action: SidebarActionsType): SidebarType => {
     return state
 }
 

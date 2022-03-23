@@ -20,3 +20,17 @@ export const usersAPI = {
             .then(response => response.data)
     },
 }
+
+export const authAPI = {
+    me() {
+        return instance.get(`auth/me`)
+            .then(response => response.data)
+    },
+}
+
+export const profileAPI = {
+    setUserProfile(userId: string) {
+        return instance.get(`profile/${userId}`)
+            .then(response => response.data)
+    },
+}

@@ -1,10 +1,12 @@
 import {v1} from "uuid";
+import {AppThunk} from "./redux-store";
+import {profileAPI} from "../api/api";
 
 export const ADD_POST = 'ADD_POST';
 export const UPDATE_NEW_POST_TEXT = 'UPDATE_NEW_POST_TEXT';
 export const SET_USER_PROFILE = 'SET_USER_PROFILE';
 
-export type ActionsTypes =
+export type ProfileActionsType =
     ReturnType<typeof addPost>
     | ReturnType<typeof updateNewPostText>
     | ReturnType<typeof setUserProfile>
@@ -53,7 +55,7 @@ const initialState = {
 
 export type ProfilePageType = typeof initialState
 
-const profileReducer = (state = initialState, action: ActionsTypes): ProfilePageType => {
+const profileReducer = (state = initialState, action: ProfileActionsType): ProfilePageType => {
     switch (action.type) {
         case ADD_POST:
             const newPost: PostType = {
@@ -89,6 +91,15 @@ export const setUserProfile = (profile: any) => {
         type: SET_USER_PROFILE,
         profile,
     } as const
+}
+
+export const getUserProfile = (userId: string): AppThunk => {
+    return (dispatch) => {
+        profileAPI.setUserProfile(userId)
+            .then(data => {
+                dispatch(setUserProfile(data))
+            })
+    }
 }
 
 export default profileReducer;
