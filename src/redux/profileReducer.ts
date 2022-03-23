@@ -78,21 +78,18 @@ export const addPost = () => {
         type: ADD_POST,
     } as const
 }
-
 export const updateNewPostText = (newText: string) => {
     return {
         type: UPDATE_NEW_POST_TEXT,
         newText,
     } as const
 }
-
 export const setUserProfile = (profile: any) => {
     return {
         type: SET_USER_PROFILE,
         profile,
     } as const
 }
-
 export const getUserProfile = (userId: string): AppThunk => {
     return (dispatch) => {
         profileAPI.setUserProfile(userId)
