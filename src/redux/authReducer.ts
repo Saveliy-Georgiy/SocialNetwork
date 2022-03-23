@@ -32,7 +32,6 @@ export const setAuthUserData = (id: number, login: string, email: string, isAuth
         data: {id, login, email, isAuth},
     } as const
 }
-
 export const getAuthUserData = ():AppThunk => {
     return (dispatch) => {
         authAPI.me()
