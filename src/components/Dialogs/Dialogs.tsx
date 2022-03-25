@@ -4,6 +4,7 @@ import DialogsItem from "./DialogsItem/DialogsItem";
 import Message from "./Message/Message";
 import {DialogsPropsType} from "./DialogsContainer";
 import {DialogsItemType, MessageType} from "../../redux/dialogsReducer";
+import {Navigate} from "react-router-dom";
 
 const Dialogs = (props: DialogsPropsType) => {
 
@@ -22,6 +23,8 @@ const Dialogs = (props: DialogsPropsType) => {
     const onNewMessageChange = (e: ChangeEvent<HTMLTextAreaElement>) => {
         props.updateNewMessageBody(e.target.value)
     }
+
+    if (!props.isAuth) return <Navigate to="/login"/>
 
     return (
         <div className={s.dialogs}>
