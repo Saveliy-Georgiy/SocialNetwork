@@ -9,7 +9,7 @@ const initialState = {
     id: 0,
     login: '',
     email: '',
-    isAuth: false,
+    isAuth: true,
 }
 
 export type AuthType = typeof initialState
