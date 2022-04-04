@@ -3,14 +3,17 @@ import s from './ProfileInfo.module.css'
 import Preloader from "../../common/Preloader/Preloader";
 import {ProfileType} from "../../../redux/profileReducer";
 import avatar from '../../../images/avatar.jpg'
+import ProfileStatus from './ProfileStatus/ProfileStatus';
 
 type ProfileInfoPropsType = {
     profile: ProfileType | null
+    status: string
+    updateStatus: (status: string) => void
 }
 
 const ProfileInfo = (props: ProfileInfoPropsType) => {
-    if(!props.profile) {
-       return <Preloader/>
+    if (!props.profile) {
+        return <Preloader/>
     }
     return (
         <div>
@@ -19,7 +22,8 @@ const ProfileInfo = (props: ProfileInfoPropsType) => {
                  alt="background"/>
             <div className={s.descriptionBlock}>
                 <div className={s.avatar}>
-                <img src={props.profile.photos.large || avatar} alt="ava"/>
+                    <img src={props.profile.photos.large || avatar} alt="ava"/>
+                    <ProfileStatus status={props.status} updateStatus={props.updateStatus}/>
                 </div>
                 <div className={s.infoWrapper}>
                     <div className={s.myName}>Saveliy Biryukov</div>
