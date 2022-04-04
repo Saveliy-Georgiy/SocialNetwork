@@ -53,7 +53,7 @@ const initialState = {
     ] as Array<PostType>,
     newPostText: 'it-kamasutra.com',
     profile: null as ProfileType | null,
-    status: "hello friend!",
+    status: "",
 }
 
 export type ProfilePageType = typeof initialState
