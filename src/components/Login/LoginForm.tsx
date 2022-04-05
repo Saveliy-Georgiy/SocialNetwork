@@ -44,7 +44,8 @@ export const LoginForm = () => {
                     </div>
                     <button type="submit">Login</button>
                 </Form>
-            </Formik></div>
+            </Formik>
+        </div>
     );
 };
 
