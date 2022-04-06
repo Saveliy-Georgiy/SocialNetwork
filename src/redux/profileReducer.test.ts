@@ -1,5 +1,5 @@
 import {v1} from "uuid";
-import profileReducer, {ADD_POST, ProfilePageType, UPDATE_NEW_POST_TEXT} from "./profileReducer";
+import profileReducer, {ADD_POST, ProfilePageType} from "./profileReducer";
 
 let initialState: ProfilePageType
 
@@ -10,7 +10,6 @@ beforeEach(() => {
             {id: v1(), message: "It's my first post", likes: 15},
             {id: v1(), message: "Yo", likes: 33},
         ],
-        newPostText: 'it-kamasutra.com',
         profile: null,
         status: "",
     }
@@ -18,14 +17,7 @@ beforeEach(() => {
 
 test("reducer should be add post", () => {
 
-    const newState = profileReducer(initialState, {type: ADD_POST})
+    const newState = profileReducer(initialState, {type: ADD_POST, message: "IT-INCUBATOR"})
 
     expect(newState.posts.length).toBe(4)
-})
-
-test("reducer should be update new post text", () => {
-
-    const newState = profileReducer(initialState, {type: UPDATE_NEW_POST_TEXT, newText: "YO"})
-
-    expect(newState.newPostText).toBe("YO")
 })

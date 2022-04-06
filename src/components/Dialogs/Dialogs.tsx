@@ -1,10 +1,11 @@
-import React, {ChangeEvent} from 'react';
+import React from 'react';
 import s from './Dialogs.module.css';
 import DialogsItem from "./DialogsItem/DialogsItem";
 import Message from "./Message/Message";
 import {DialogsPropsType} from "./DialogsContainer";
 import {DialogsItemType, MessageType} from "../../redux/dialogsReducer";
 import {Navigate} from "react-router-dom";
+import {AddMessageForm} from "./AddMessageForm/AddMessageForm";
 
 const Dialogs = (props: DialogsPropsType) => {
 
@@ -16,12 +17,8 @@ const Dialogs = (props: DialogsPropsType) => {
         <Message key={m.id} id={m.id} message={m.message}/>
     )
 
-    const onSendMessageClick = () => {
-        props.sendMessage()
-    }
-
-    const onNewMessageChange = (e: ChangeEvent<HTMLTextAreaElement>) => {
-        props.updateNewMessageBody(e.target.value)
+    const onSendMessageClick = (message: string) => {
+        props.sendMessage(message)
     }
 
     if (!props.isAuth) return <Navigate to="/login"/>
@@ -35,11 +32,7 @@ const Dialogs = (props: DialogsPropsType) => {
             <div className={s.messages}>
                 {messagesItem}
             </div>
-            <div><textarea value={props.dialogsPage.newMessageBody} onChange={onNewMessageChange} placeholder="Enter your message"/>
-            </div>
-            <div>
-                <button onClick={onSendMessageClick}>Send</button>
-            </div>
+            <AddMessageForm sendMessage={onSendMessageClick}/>
         </div>
     );
 };

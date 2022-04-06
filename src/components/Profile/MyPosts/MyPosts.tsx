@@ -3,6 +3,7 @@ import s from './MyPosts.module.css'
 import Post from "./Post/Post";
 import {MyPostsPropsType} from "./MyPostsContainer";
 import {PostType} from '../../../redux/profileReducer';
+import {AddNewPostForm} from "./AddNewPostForm/AddNewPostForm";
 
 const MyPosts = (props: MyPostsPropsType) => {
 
@@ -10,14 +11,8 @@ const MyPosts = (props: MyPostsPropsType) => {
         <Post key={m.id} id={m.id} message={m.message} likes={m.likes}/>
     )
 
-    const newPostElement = React.createRef<HTMLTextAreaElement>();
-
-    const changeTextarea = () => {
-        (newPostElement.current) && props.updateNewPostText(newPostElement.current.value)
-    }
-
-    const onAddPost = () => {
-        (newPostElement.current) && props.addPost()
+    const onAddPost = (message: string) => {
+        props.addPost(message)
     }
 
     return (
@@ -26,14 +21,7 @@ const MyPosts = (props: MyPostsPropsType) => {
                 <div className={s.header}>
                     My posts
                 </div>
-                <div className={s.textareaWrapper}>
-                    <textarea ref={newPostElement} value={props.profilePage.newPostText} onChange={changeTextarea}
-                              placeholder="your news..."/>
-                </div>
-
-                <div className={s.buttonWrapper}>
-                    <button onClick={onAddPost}>Add post</button>
-                </div>
+              <AddNewPostForm onAddPost={onAddPost}/>
             </div>
             <div className={s.posts}>
                 {postsElements}

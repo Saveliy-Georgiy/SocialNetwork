@@ -3,7 +3,7 @@ import {v1} from "uuid";
 export const UPDATE_NEW_MESSAGE_BODY = 'UPDATE_NEW_MESSAGE_BODY';
 export const SEND_MESSAGE = 'SEND_MESSAGE';
 
-export type DialogsActionsType = ReturnType<typeof updateNewMessageBodyAC> | ReturnType<typeof sendMessageAC>
+export type DialogsActionsType = ReturnType<typeof sendMessage>
 
 export type DialogsItemType = {
     id: string
@@ -30,35 +30,26 @@ const initialState = {
         {id: v1(), message: "Nice project!"},
         {id: v1(), message: "What am I doing here?"},
     ] as Array<MessageType>,
-    newMessageBody: ""
 }
 
 export type DialogPageType = typeof initialState
 
 export const dialogsReducer = (state = initialState, action: DialogsActionsType): DialogPageType => {
     switch (action.type) {
-        case UPDATE_NEW_MESSAGE_BODY:
-            return {...state, newMessageBody: action.body}
         case SEND_MESSAGE:
             return {
                 ...state,
-                newMessageBody: "",
-                messages: [...state.messages, {id: v1(), message: state.newMessageBody}],
+                messages: [...state.messages, {id: v1(), message: action.payload.message}],
             }
         default:
             return state
     }
 }
 
-export const updateNewMessageBodyAC = (body: string) => {
-    return {
-        type: UPDATE_NEW_MESSAGE_BODY,
-        body: body
-    } as const
-}
-export const sendMessageAC = () => {
+export const sendMessage = (message: string) => {
     return {
         type: SEND_MESSAGE,
+        payload: {message,},
     } as const
 }
 

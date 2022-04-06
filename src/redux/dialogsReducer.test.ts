@@ -1,5 +1,5 @@
 import {v1} from "uuid";
-import dialogsReducer, {DialogPageType, SEND_MESSAGE, UPDATE_NEW_MESSAGE_BODY} from "./dialogsReducer";
+import dialogsReducer, {DialogPageType, SEND_MESSAGE} from "./dialogsReducer";
 
 let initialState: DialogPageType
 
@@ -19,21 +19,16 @@ beforeEach(() => {
             {id: v1(), message: "Nice project"},
             {id: v1(), message: "What am I doing here?"},
         ],
-        newMessageBody: ""
     }
-})
-
-test("reducer should be add update new message", () => {
-
-
-    const newState = dialogsReducer(initialState, {type: UPDATE_NEW_MESSAGE_BODY, body: "some text"})
-
-    expect(newState.newMessageBody).toBe("some text")
 })
 
 test("reducer should send message", () => {
 
-    const newState = dialogsReducer(initialState, {type: SEND_MESSAGE})
+    const newState = dialogsReducer(initialState, {
+        type: SEND_MESSAGE, payload: {
+            message: "hello man!"
+        }
+    })
 
     expect(newState.messages.length).toBe(6)
 })

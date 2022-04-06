@@ -3,13 +3,11 @@ import {AppThunk} from "./redux-store";
 import {profileAPI} from "../api/api";
 
 export const ADD_POST = 'ADD_POST';
-export const UPDATE_NEW_POST_TEXT = 'UPDATE_NEW_POST_TEXT';
 export const SET_USER_PROFILE = 'SET_USER_PROFILE';
 export const SET_STATUS = 'SET_STATUS';
 
 export type ProfileActionsType =
     ReturnType<typeof addPost>
-    | ReturnType<typeof updateNewPostText>
     | ReturnType<typeof setUserProfile>
     | ReturnType<typeof setStatus>
 
@@ -51,7 +49,6 @@ const initialState = {
         {id: v1(), message: "It's my first post", likes: 15},
         {id: v1(), message: "Yo", likes: 33},
     ] as Array<PostType>,
-    newPostText: 'it-kamasutra.com',
     profile: null as ProfileType | null,
     status: "",
 }
@@ -63,12 +60,10 @@ const profileReducer = (state = initialState, action: ProfileActionsType): Profi
         case ADD_POST:
             const newPost: PostType = {
                 id: v1(),
-                message: state.newPostText,
+                message: action.message,
                 likes: 0
             }
-            return {...state, posts: [...state.posts, newPost], newPostText: ""}
-        case UPDATE_NEW_POST_TEXT:
-            return {...state, newPostText: action.newText}
+            return {...state, posts: [...state.posts, newPost]}
         case SET_USER_PROFILE:
             return {...state, profile: action.profile}
         case SET_STATUS:
@@ -78,15 +73,10 @@ const profileReducer = (state = initialState, action: ProfileActionsType): Profi
     }
 }
 
-export const addPost = () => {
+export const addPost = (message: string) => {
     return {
         type: ADD_POST,
-    } as const
-}
-export const updateNewPostText = (newText: string) => {
-    return {
-        type: UPDATE_NEW_POST_TEXT,
-        newText,
+        message,
     } as const
 }
 export const setUserProfile = (profile: any) => {

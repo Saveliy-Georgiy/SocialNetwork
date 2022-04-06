@@ -1,0 +1,44 @@
+.textareaWrapper {
+    display: flex;
+    flex-direction: column;
+    margin: 20px 0 12px 0;
+
+}
+
+.textareaWrapper textarea {
+    resize: none;
+    align-self: stretch;
+    height: 50px;
+    background-color: rgb(220, 220, 247);
+    padding: 5px 10px 5px 10px;
+    font-size: 16px;
+}
+
+.errorMessage {
+    padding: 5px 5px 15px 10px;
+}
+
+.buttonWrapper {
+    display: flex;
+    align-self: flex-end;
+}
+
+.buttonWrapper button {
+    background-color: #4CAF50;
+    font-size: 18px;
+    border: none;
+    border-radius: 4px;
+    color: white;
+    padding: 4px;
+    width: 100px;
+}
+
+.buttonWrapper button:disabled {
+   opacity: 80%;
+}
+
+.buttonWrapper button:active {
+    transform: scale(0.98);
+    box-shadow: 3px 2px 22px 1px rgba(0, 0, 0, 0.24);
+}
+
