@@ -1,0 +1,25 @@
+.default {
+    font-size: 16px;
+    border: none;
+    border-radius: 4px;
+    color: white;
+    padding: 5px 10px;
+    margin: 5px;
+}
+
+.default:active {
+    transform: scale(0.98);
+    box-shadow: 3px 2px 22px 1px rgba(0, 0, 0, 0.24);
+}
+
+.default:disabled {
+    opacity: 50%;
+}
+
+.red {
+    background: red;
+}
+
+.green {
+    background-color: #4CAF50;
+}

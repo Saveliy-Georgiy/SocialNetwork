@@ -1,9 +1,11 @@
 import * as React from 'react';
 import {ErrorMessage, Field, Form, Formik,} from 'formik';
 import {loginFormSchema} from "./FormValidation/LoginFormSchema";
-
+import s from './LoginForm.module.css'
+import Button from "../universal/Button";
 export const LoginForm = () => {
     const initialValues = {email: '', password: '', rememberMe: false}
+    //const finalStyleInput =
     return (
         <div>
             <Formik
@@ -21,7 +23,6 @@ export const LoginForm = () => {
                     }
                     return errors;
                 }}
-
                 onSubmit={(values, actions) => {
                     console.log({values, actions});
                     alert(JSON.stringify(values, null, 2));
@@ -31,18 +32,19 @@ export const LoginForm = () => {
             >
                 <Form>
                     <div>
-                        <Field placeholder={"login"} type="email" name="email"/>
+                        <Field placeholder={"login"} type="email" name="email" className={s.input}/>
                     </div>
-                    <ErrorMessage name="email" component="div"/>
+                    <ErrorMessage name="email" component="div" className={s.errorMessage}/>
                     <div>
-                        <Field placeholder={"password"} type="password" name="password"/>
+                        <Field placeholder={"password"} type="password" name="password" className={s.input}/>
                     </div>
-                    <ErrorMessage name="password" component="div"/>
+                    <ErrorMessage name="password" component="div" className={s.errorMessage}/>
                     <div>
                         <Field type={'checkbox'} name={'rememberMe'}/>
                         <label htmlFor={'rememberMe'}> remember me </label>
                     </div>
-                    <button type="submit">Login</button>
+                    <Button type="submit">Login</Button>
+                   {/* <button type="submit">Login</button>*/}
                 </Form>
             </Formik>
         </div>
