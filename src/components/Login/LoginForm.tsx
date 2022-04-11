@@ -3,9 +3,18 @@ import {ErrorMessage, Field, Form, Formik,} from 'formik';
 import {loginFormSchema} from "./FormValidation/LoginFormSchema";
 import s from './LoginForm.module.css'
 import Button from "../universal/Button";
-export const LoginForm = () => {
+import {login} from "../../redux/authReducer";
+import {useDispatch} from "react-redux";
+
+type LoginFormPropsType = {
+    login: (email: string, password: string, rememberMe: boolean) => void
+}
+
+export const LoginForm = (props: LoginFormPropsType) => {
+
+    let dispatch = useDispatch()
     const initialValues = {email: '', password: '', rememberMe: false}
-    //const finalStyleInput =
+
     return (
         <div>
             <Formik
@@ -24,8 +33,9 @@ export const LoginForm = () => {
                     return errors;
                 }}
                 onSubmit={(values, actions) => {
+                    dispatch(props.login(values.email, values.password, values.rememberMe))
                     console.log({values, actions});
-                    alert(JSON.stringify(values, null, 2));
+                    /*alert(JSON.stringify(values, null, 2));*/
                     actions.setSubmitting(false);
                 }}
                 validationSchema={loginFormSchema}
@@ -44,7 +54,7 @@ export const LoginForm = () => {
                         <label htmlFor={'rememberMe'}> remember me </label>
                     </div>
                     <Button type="submit">Login</Button>
-                   {/* <button type="submit">Login</button>*/}
+                    {/*<button type="submit">Login</button>*/}
                 </Form>
             </Formik>
         </div>

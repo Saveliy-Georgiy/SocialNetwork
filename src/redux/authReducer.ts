@@ -9,7 +9,7 @@ const initialState = {
     id: 0,
     login: '',
     email: '',
-    isAuth: true,
+    isAuth: false,
 }
 
 export type AuthType = typeof initialState
@@ -35,11 +35,30 @@ export const setAuthUserData = (id: number, login: string, email: string, isAuth
 export const getAuthUserData = ():AppThunk => {
     return (dispatch) => {
         authAPI.me()
-            .then(data => {
-                if(data.resultCode === 0) {
-                    let isAuth = true
-                    let {id, login, email,} = data.data
-                    dispatch(setAuthUserData(id, login, email, isAuth))
+            .then(response => {
+                if(response.data.resultCode === 0) {
+                    let {id, login, email,} = response.data.data
+                    dispatch(setAuthUserData(id, login, email, true))
+                }
+            })
+    }
+}
+export const login = (email: string, password: string, rememberMe: boolean):AppThunk => {
+    return (dispatch) => {
+        authAPI.login(email, password, rememberMe)
+            .then(response => {
+                if (response.data.resultCode === 0) {
+                    dispatch(getAuthUserData())
+                }
+            })
+    }
+}
+export const logout = ():AppThunk => {
+    return (dispatch) => {
+        authAPI.logout()
+            .then(response => {
+                if (response.data.resultCode === 0) {
+                    dispatch(setAuthUserData(NaN, '', '', false))
                 }
             })
     }
