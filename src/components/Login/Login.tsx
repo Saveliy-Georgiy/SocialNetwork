@@ -9,7 +9,7 @@ type MapStatePropsType = {
     isAuth: boolean
 }
 type MapDispatchPropsType = {
-    login: (email: string, password: string, rememberMe: boolean) => void
+    login: (email: string, password: string, rememberMe: boolean, setStatus: any) => void
 }
 
 type LoginPropsType = MapStatePropsType & MapDispatchPropsType

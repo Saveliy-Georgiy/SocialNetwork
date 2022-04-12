@@ -43,12 +43,14 @@ export const getAuthUserData = ():AppThunk => {
             })
     }
 }
-export const login = (email: string, password: string, rememberMe: boolean):AppThunk => {
+export const login = (email: string, password: string, rememberMe: boolean, setStatus: any):AppThunk => {
     return (dispatch) => {
         authAPI.login(email, password, rememberMe)
             .then(response => {
                 if (response.data.resultCode === 0) {
                     dispatch(getAuthUserData())
+                } else {
+                    setStatus(response.data.messages)
                 }
             })
     }

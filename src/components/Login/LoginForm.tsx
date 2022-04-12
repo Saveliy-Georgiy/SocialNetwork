@@ -7,7 +7,7 @@ import {login} from "../../redux/authReducer";
 import {useDispatch} from "react-redux";
 
 type LoginFormPropsType = {
-    login: (email: string, password: string, rememberMe: boolean) => void
+    login: (email: string, password: string, rememberMe: boolean, setStatus: any) => void
 }
 
 export const LoginForm = (props: LoginFormPropsType) => {
@@ -32,30 +32,35 @@ export const LoginForm = (props: LoginFormPropsType) => {
                     }
                     return errors;
                 }}
-                onSubmit={(values, actions) => {
-                    dispatch(props.login(values.email, values.password, values.rememberMe))
-                    console.log({values, actions});
-                    /*alert(JSON.stringify(values, null, 2));*/
-                    actions.setSubmitting(false);
+                onSubmit={(values, {setSubmitting, setStatus}) => {
+                    dispatch(props.login(values.email, values.password, values.rememberMe, setStatus))
+                    setSubmitting(false);
                 }}
                 validationSchema={loginFormSchema}
             >
-                <Form>
-                    <div>
-                        <Field placeholder={"login"} type="email" name="email" className={s.input}/>
-                    </div>
-                    <ErrorMessage name="email" component="div" className={s.errorMessage}/>
-                    <div>
-                        <Field placeholder={"password"} type="password" name="password" className={s.input}/>
-                    </div>
-                    <ErrorMessage name="password" component="div" className={s.errorMessage}/>
-                    <div>
-                        <Field type={'checkbox'} name={'rememberMe'}/>
-                        <label htmlFor={'rememberMe'}> remember me </label>
-                    </div>
-                    <Button type="submit">Login</Button>
-                    {/*<button type="submit">Login</button>*/}
-                </Form>
+                {({
+                      status
+                  }) => (
+                    <Form>
+                        <div>
+                            <Field placeholder={"login"} type="email" name="email" className={s.input}/>
+                        </div>
+                        <ErrorMessage name="email" component="div" className={s.errorMessage}/>
+                        <div>
+                            <Field placeholder={"password"} type="password" name="password" className={s.input}/>
+                        </div>
+                        <ErrorMessage name="password" component="div" className={s.errorMessage}/>
+                        <div>
+                            <div className={s.errorMessage}>{status}</div>
+                            <Field type={'checkbox'} name={'rememberMe'}/>
+                            <label htmlFor={'rememberMe'}> remember me </label>
+                        </div>
+                        <Button type="submit">Login</Button>
+
+                        {/*<button type="submit">Login</button>*/}
+                    </Form>
+                )}
+
             </Formik>
         </div>
     );
