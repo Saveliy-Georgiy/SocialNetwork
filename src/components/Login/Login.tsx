@@ -23,7 +23,6 @@ const LoginPage = (props: LoginPropsType) => {
             <h1>LOGIN</h1>
             <LoginForm login={login}/>
         </div>
-
     );
 };
 
