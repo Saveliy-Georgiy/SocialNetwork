@@ -5,11 +5,13 @@ import {profileAPI} from '../api/api';
 export const ADD_POST = 'ADD_POST';
 export const SET_USER_PROFILE = 'SET_USER_PROFILE';
 export const SET_STATUS = 'SET_STATUS';
+export const DELETE_POST = 'DELETE_POST';
 
 export type ProfileActionsType =
     ReturnType<typeof addPost>
     | ReturnType<typeof setUserProfile>
     | ReturnType<typeof setStatus>
+    | ReturnType<typeof deletePost>
 
 export type PostType = {
     id: string
@@ -68,6 +70,8 @@ const profileReducer = (state = initialState, action: ProfileActionsType): Profi
             return {...state, profile: action.profile};
         case SET_STATUS:
             return {...state, status: action.status};
+        case 'DELETE_POST':
+            return  {...state, posts: state.posts.filter(p => p.id !== action.postId && p)}
         default:
             return state;
     }
@@ -89,6 +93,12 @@ export const setStatus = (status: string) => {
     return {
         type: SET_STATUS,
         status,
+    } as const;
+};
+export const deletePost = (postId: string) => {
+    return {
+        type: DELETE_POST,
+        postId,
     } as const;
 };
 export const getUserProfile = (userId: string): AppThunk => {
