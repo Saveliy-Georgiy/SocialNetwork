@@ -1,6 +1,6 @@
-import {v1} from "uuid";
-import {AppThunk} from "./redux-store";
-import {profileAPI} from "../api/api";
+import {v1} from 'uuid';
+import {AppThunk} from './redux-store';
+import {profileAPI} from '../api/api';
 
 export const ADD_POST = 'ADD_POST';
 export const SET_USER_PROFILE = 'SET_USER_PROFILE';
@@ -45,13 +45,13 @@ export type ProfileType = {
 
 const initialState = {
     posts: [
-        {id: v1(), message: "Hi, how a you?", likes: 25},
-        {id: v1(), message: "It's my first post", likes: 15},
-        {id: v1(), message: "Yo", likes: 33},
+        {id: v1(), message: 'Hi, how a you?', likes: 25},
+        {id: v1(), message: 'It\'s my first post', likes: 15},
+        {id: v1(), message: 'Yo', likes: 33},
     ] as Array<PostType>,
     profile: null as ProfileType | null,
-    status: "",
-}
+    status: '',
+};
 
 export type ProfilePageType = typeof initialState
 
@@ -62,60 +62,60 @@ const profileReducer = (state = initialState, action: ProfileActionsType): Profi
                 id: v1(),
                 message: action.message,
                 likes: 0
-            }
-            return {...state, posts: [...state.posts, newPost]}
+            };
+            return {...state, posts: [...state.posts, newPost]};
         case SET_USER_PROFILE:
-            return {...state, profile: action.profile}
+            return {...state, profile: action.profile};
         case SET_STATUS:
-            return {...state, status: action.status}
+            return {...state, status: action.status};
         default:
-            return state
+            return state;
     }
-}
+};
 
 export const addPost = (message: string) => {
     return {
         type: ADD_POST,
         message,
-    } as const
-}
+    } as const;
+};
 export const setUserProfile = (profile: any) => {
     return {
         type: SET_USER_PROFILE,
         profile,
-    } as const
-}
+    } as const;
+};
 export const setStatus = (status: string) => {
     return {
         type: SET_STATUS,
         status,
-    } as const
-}
+    } as const;
+};
 export const getUserProfile = (userId: string): AppThunk => {
     return (dispatch) => {
         profileAPI.setUserProfile(userId)
             .then(response => {
-                dispatch(setUserProfile(response.data))
-            })
-    }
-}
+                dispatch(setUserProfile(response.data));
+            });
+    };
+};
 export const getStatus = (userId: string): AppThunk => {
     return (dispatch) => {
         profileAPI.getUserStatus(userId)
             .then(response => {
-                dispatch(setStatus(response.data))
-            })
-    }
-}
+                dispatch(setStatus(response.data));
+            });
+    };
+};
 export const updateStatus = (status: string): AppThunk => {
     return (dispatch) => {
         profileAPI.updateUserStatus(status)
             .then(response => {
                 if (response.data.resultCode === 0) {
-                    dispatch(setStatus(status))
+                    dispatch(setStatus(status));
                 }
-            })
-    }
-}
+            });
+    };
+};
 
 export default profileReducer;
