@@ -10,7 +10,7 @@ import LoginPage from './components/Login/Login';
 import {connect} from "react-redux";
 import {compose} from "redux";
 import {initializeApp} from "./redux/appReducer";
-import {AppStateType} from "./redux/redux-store";
+import {AppStateType} from "./redux/reduxStore";
 import Preloader from "./components/common/Preloader/Preloader";
 
 export type AppPropsType = MapStatePropsType & MapDispatchPropsType

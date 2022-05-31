@@ -3,7 +3,7 @@ import {connect} from 'react-redux';
 import {login} from '../../redux/authReducer';
 import {LoginForm} from './LoginForm';
 import {Navigate} from 'react-router-dom';
-import {AppStateType} from '../../redux/redux-store';
+import {AppStateType} from '../../redux/reduxStore';
 
 type MapStatePropsType = {
     isAuth: boolean

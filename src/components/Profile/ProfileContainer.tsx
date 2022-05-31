@@ -1,7 +1,7 @@
 import React, {ComponentType} from 'react';
 import Profile from "./Profile";
 import {connect} from 'react-redux';
-import {AppStateType} from "../../redux/redux-store";
+import {AppStateType} from "../../redux/reduxStore";
 import {getUserProfile, getStatus, updateStatus} from "../../redux/profileReducer";
 import {PathMatch, useMatch, useParams} from "react-router-dom";
 import {withAuthRedirect} from '../../hoc/withAuthRedirect';

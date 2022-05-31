@@ -1,6 +1,6 @@
 import React, {ComponentType} from 'react';
 import {connect} from 'react-redux';
-import {AppStateType} from '../../redux/redux-store';
+import {AppStateType} from '../../redux/reduxStore';
 import {
     follow,
     requestUsers,

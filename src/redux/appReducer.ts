@@ -1,4 +1,4 @@
-import {AppThunk} from './redux-store';
+import {AppThunk} from './reduxStore';
 import {getAuthUserData} from './authReducer';
 
 export enum AppReducerActionTypes {
@@ -30,12 +30,10 @@ export const initializedSuccess = () => {
         type: AppReducerActionTypes.INITIALIZED_SUCCESS,
     } as const
 }
-export const initializeApp = (): AppThunk => {
-    return (dispatch) => {
+export const initializeApp = (): AppThunk => async (dispatch) => {
         let promise = dispatch(getAuthUserData())
         Promise.all([promise])
             .then(() => {
                 dispatch(initializedSuccess())
             })
     }
-}
