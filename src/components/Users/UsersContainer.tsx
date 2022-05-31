@@ -17,10 +17,10 @@ import {
     getCurrentPage,
     getFollowingInProgress,
     getIsFetching,
-    getPageSize,
+    getPageSize, getSiblingCount,
     getTotalUsersCount,
     getUsers,
-} from "../../redux/usersSelectors";
+} from '../../redux/usersSelectors';
 
 type MapStatePropsType = {
     users: Array<UserType>
@@ -29,14 +29,15 @@ type MapStatePropsType = {
     currentPage: number
     isFetching: boolean
     followingInProgress: Array<number>
+    siblingCount: number
 }
 
 type MapDispatchPropsType = {
     follow: (userId: number) => void
     unfollow: (userId: number) => void
-    setCurrentPage: (currentPage: number) => void
+    setCurrentPage: (currentPage: number | string) => void
     toggleFollowingProgress: (isFetching: boolean, userId: number) => void
-    requestUsers: (currentPage: number, pageSize: number) => void
+    requestUsers: (currentPage: number | string, pageSize: number) => void
 }
 
 export type UsersPropsType = MapStatePropsType & MapDispatchPropsType
@@ -46,7 +47,7 @@ class UsersContainer extends React.Component<UsersPropsType, {}> {
     componentDidMount() {
         this.props.requestUsers(this.props.currentPage, this.props.pageSize)
     }
-    onPageChanged = (pageNumber: number) => {
+    onPageChanged = (pageNumber: number | string) => {
         this.props.requestUsers(pageNumber, this.props.pageSize)
     }
 
@@ -61,6 +62,7 @@ class UsersContainer extends React.Component<UsersPropsType, {}> {
                 currentPage={this.props.currentPage}
                 users={this.props.users}
                 followingInProgress={this.props.followingInProgress}
+                siblingCount={this.props.siblingCount}
                 onPageChanged={this.onPageChanged}
                 follow={this.props.follow}
                 unfollow={this.props.unfollow}
@@ -78,6 +80,7 @@ const mapStateToProps = (state: AppStateType) => {
         currentPage: getCurrentPage(state),
         isFetching: getIsFetching(state),
         followingInProgress: getFollowingInProgress(state),
+        siblingCount: getSiblingCount(state),
     }
 }
 export default compose<ComponentType>(

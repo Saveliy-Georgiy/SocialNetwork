@@ -44,9 +44,10 @@ const initialState = {
     users: [] as Array<UserType>,
     pageSize: 5,
     totalUsersCount: 0,
-    currentPage: 1,
+    currentPage: 1 as string | number,
     isFetching: false,
     followingInProgress: [] as Array<number>,
+    siblingCount: 1,
 };
 
 export type UsersPageType = typeof initialState
@@ -94,7 +95,7 @@ export const setUsers = (users: Array<UserType>) => {
         users,
     } as const;
 };
-export const setCurrentPage = (currentPage: number) => {
+export const setCurrentPage = (currentPage: number | string) => {
     return {
         type: UsersActionTypes.SET_CURRENT_PAGE,
         currentPage,
@@ -119,7 +120,7 @@ export const toggleFollowingProgress = (isFetching: boolean, userId: number) => 
         userId,
     } as const;
 };
-export const requestUsers = (currentPage: number, pageSize: number): AppThunk => async (dispatch) => {
+export const requestUsers = (currentPage: number | string, pageSize: number): AppThunk => async (dispatch) => {
     dispatch(toggleIsFetching(true));
     dispatch(setCurrentPage(currentPage));
     let data = await usersAPI.getUsers(currentPage, pageSize);
