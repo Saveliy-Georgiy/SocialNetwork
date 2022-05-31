@@ -1,8 +1,8 @@
 import React from 'react';
-import s from "./Users.module.css";
-import {UserType} from "../../redux/usersReducer";
+import s from './Users.module.css';
+import {UserType} from '../../redux/usersReducer';
 import {NavLink} from 'react-router-dom';
-import avatar from '../../images/avatar.jpg'
+import avatar from '../../images/avatar.jpg';
 
 type UsersType = {
     totalUsersCount: number
@@ -18,11 +18,11 @@ type UsersType = {
 
 const Users = (props: UsersType) => {
 
-    let pagesCount = Math.ceil(props.totalUsersCount / props.pageSize)
+    let pagesCount = Math.ceil(props.totalUsersCount / props.pageSize);
 
     let pages = [];
     for (let i = 1; i <= pagesCount; i++) {
-        pages.push(i)
+        pages.push(i);
     }
 
     return (
@@ -43,13 +43,13 @@ const Users = (props: UsersType) => {
                                     <button
                                         disabled={props.followingInProgress.some(id => id === u.id)}
                                         onClick={() => {
-                                            props.unfollow(u.id)
+                                            props.unfollow(u.id);
                                         }}>Unfollow</button>
                                     :
                                     <button
                                         disabled={props.followingInProgress.some(id => id === u.id)}
                                         onClick={() => {
-                                            props.follow(u.id)
+                                            props.follow(u.id);
                                         }}>Follow</button>
                                 }
 
@@ -61,8 +61,8 @@ const Users = (props: UsersType) => {
                                 <div>{u.status}</div>
                             </div>
                             <div className={s.locationWrapper}>
-                                <div className={s.location}>{"u.location.country"},</div>
-                                <div className={s.location}>{"u.location.city"}</div>
+                                <div className={s.location}>{'u.location.country'},</div>
+                                <div className={s.location}>{'u.location.city'}</div>
                             </div>
                         </div>
                     </div>)
@@ -73,11 +73,11 @@ const Users = (props: UsersType) => {
                         className={props.currentPage === p ? s.selectedPage : s.simplePage}
                         onClick={() => props.onPageChanged(p)}>
                                     {p}
-                                    </span>
+                                    </span>;
                 })}
             </div>
         </div>
     );
-}
+};
 
 export default Users;
