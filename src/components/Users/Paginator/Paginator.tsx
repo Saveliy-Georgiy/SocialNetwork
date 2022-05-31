@@ -5,6 +5,7 @@ import arrowLeftBlue from "../../../icons/arrowLeftBlue.png"
 import arrowLeftGrey from "../../../icons/arrowLeftGrey.png"
 import arrowRightBlue from "../../../icons/arrowRightBlue.png"
 import arrowRightGrey from "../../../icons/arrowRightGrey.png"
+import {v1} from 'uuid';
 
 type PaginatorPropsType = {
     currentPage: number
@@ -14,7 +15,7 @@ type PaginatorPropsType = {
     pageSize: number
 }
 
-export const Paginator = (props: PaginatorPropsType) => {
+export const Paginator = React.memo((props: PaginatorPropsType) => {
     const {
         currentPage,
         onPageChange,
@@ -64,7 +65,7 @@ export const Paginator = (props: PaginatorPropsType) => {
                 </div>
                 {paginationRange.map((pageNumber: number | string, i: number) => {
                     if (pageNumber === DOTS) {
-                        return <span key={paginationRange[i]} className={finalDotsStyle}>{DOTS}</span>;
+                        return <span key={v1()} className={finalDotsStyle}>{DOTS}</span>;
                     }
                     return (
                         <span key={paginationRange[i]}
@@ -83,4 +84,4 @@ export const Paginator = (props: PaginatorPropsType) => {
             </div>
         </div>
     );
-};
+});
