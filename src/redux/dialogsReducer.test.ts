@@ -1,5 +1,5 @@
-import {v1} from "uuid";
-import dialogsReducer, {DialogPageType, SEND_MESSAGE} from "./dialogsReducer";
+import {v1} from 'uuid';
+import dialogsReducer, {DialogPageType, DialogsActionTypes} from './dialogsReducer';
 
 let initialState: DialogPageType
 
@@ -25,7 +25,7 @@ beforeEach(() => {
 test("reducer should send message", () => {
 
     const newState = dialogsReducer(initialState, {
-        type: SEND_MESSAGE, payload: {
+        type: DialogsActionTypes.SEND_MESSAGE, payload: {
             message: "hello man!"
         }
     })

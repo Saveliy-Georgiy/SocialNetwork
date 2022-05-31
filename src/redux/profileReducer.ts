@@ -2,12 +2,15 @@ import {v1} from 'uuid';
 import {AppThunk} from './redux-store';
 import {profileAPI} from '../api/api';
 
-export const ADD_POST = 'ADD_POST';
-export const SET_USER_PROFILE = 'SET_USER_PROFILE';
-export const SET_STATUS = 'SET_STATUS';
-export const DELETE_POST = 'DELETE_POST';
+export enum ProfileActionTypes {
+    ADD_POST = 'Profile/ADD_POST',
+    SET_USER_PROFILE = 'Profile/SET_USER_PROFILE',
+    SET_STATUS = 'Profile/SET_STATUS',
+    DELETE_POST = 'Profile/DELETE_POST',
+    SEND_MESSAGE = 'Profile/Dialogs/SEND_MESSAGE',
+}
 
-export type ProfileActionsType =
+export type ProfileRootActionType =
     ReturnType<typeof addPost>
     | ReturnType<typeof setUserProfile>
     | ReturnType<typeof setStatus>
@@ -57,20 +60,20 @@ const initialState = {
 
 export type ProfilePageType = typeof initialState
 
-const profileReducer = (state = initialState, action: ProfileActionsType): ProfilePageType => {
+const profileReducer = (state = initialState, action: ProfileRootActionType): ProfilePageType => {
     switch (action.type) {
-        case ADD_POST:
+        case ProfileActionTypes.ADD_POST:
             const newPost: PostType = {
                 id: v1(),
                 message: action.message,
                 likes: 0
             };
             return {...state, posts: [...state.posts, newPost]};
-        case SET_USER_PROFILE:
+        case ProfileActionTypes.SET_USER_PROFILE:
             return {...state, profile: action.profile};
-        case SET_STATUS:
+        case ProfileActionTypes.SET_STATUS:
             return {...state, status: action.status};
-        case 'DELETE_POST':
+        case ProfileActionTypes.DELETE_POST:
             return  {...state, posts: state.posts.filter(p => p.id !== action.postId && p)}
         default:
             return state;
@@ -79,25 +82,25 @@ const profileReducer = (state = initialState, action: ProfileActionsType): Profi
 
 export const addPost = (message: string) => {
     return {
-        type: ADD_POST,
+        type: ProfileActionTypes.ADD_POST,
         message,
     } as const;
 };
 export const setUserProfile = (profile: any) => {
     return {
-        type: SET_USER_PROFILE,
+        type: ProfileActionTypes.SET_USER_PROFILE,
         profile,
     } as const;
 };
 export const setStatus = (status: string) => {
     return {
-        type: SET_STATUS,
+        type: ProfileActionTypes.SET_STATUS,
         status,
     } as const;
 };
 export const deletePost = (postId: string) => {
     return {
-        type: DELETE_POST,
+        type: ProfileActionTypes.DELETE_POST,
         postId,
     } as const;
 };

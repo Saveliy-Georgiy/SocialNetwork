@@ -1,9 +1,11 @@
 import {AppThunk} from "./redux-store";
 import {authAPI} from "../api/api";
 
-export const SET_USER_DATA = 'SET_USER_DATA';
+export enum AuthActionTypes {
+    SET_USER_DATA = 'Auth/SET_USER_DATA',
+}
 
-export type AuthActionsType = ReturnType<typeof setAuthUserData>
+export type AuthRootActionType = ReturnType<typeof setAuthUserData>
 
 const initialState = {
     id: 0,
@@ -14,9 +16,9 @@ const initialState = {
 
 export type AuthType = typeof initialState
 
-export const authReducer = (state = initialState, action: AuthActionsType): AuthType => {
+export const authReducer = (state = initialState, action: AuthRootActionType): AuthType => {
     switch (action.type) {
-        case SET_USER_DATA:
+        case AuthActionTypes.SET_USER_DATA:
             return {
                 ...state,
                 ...action.data,
@@ -28,7 +30,7 @@ export const authReducer = (state = initialState, action: AuthActionsType): Auth
 
 export const setAuthUserData = (id: number, login: string, email: string, isAuth: boolean) => {
     return {
-        type: SET_USER_DATA,
+        type: AuthActionTypes.SET_USER_DATA,
         data: {id, login, email, isAuth},
     } as const
 }

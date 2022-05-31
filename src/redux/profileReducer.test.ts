@@ -1,4 +1,4 @@
-import profileReducer, {ADD_POST, DELETE_POST, ProfilePageType} from './profileReducer';
+import profileReducer, {ProfileActionTypes, ProfilePageType} from './profileReducer';
 
 let initialState: ProfilePageType
 
@@ -16,7 +16,7 @@ beforeEach(() => {
 
 test("new post should be added", () => {
 
-    const newState = profileReducer(initialState, {type: ADD_POST, message: "IT-INCUBATOR"})
+    const newState = profileReducer(initialState, {type: ProfileActionTypes.ADD_POST, message: "IT-INCUBATOR"})
 
     expect(newState.posts.length).toBe(4)
     expect(newState.posts[3].message).toBe("IT-INCUBATOR")
@@ -24,14 +24,14 @@ test("new post should be added", () => {
 
   test("should be deleted post", () => {
 
-    const newState = profileReducer(initialState, {type: DELETE_POST, postId: '1'})
+    const newState = profileReducer(initialState, {type: ProfileActionTypes.DELETE_POST, postId: '1'})
 
     expect(newState.posts.length).toBe(2)
 })
 
 test("should not be deleted post", () => {
 
-    const newState = profileReducer(initialState, {type: DELETE_POST, postId: '1000'})
+    const newState = profileReducer(initialState, {type: ProfileActionTypes.DELETE_POST, postId: '1000'})
 
     expect(newState.posts.length).toBe(3)
 })

@@ -1,9 +1,11 @@
-import {AppThunk} from "./redux-store";
-import {getAuthUserData} from "./authReducer";
+import {AppThunk} from './redux-store';
+import {getAuthUserData} from './authReducer';
 
-export const INITIALIZED_SUCCESS = 'INITIALIZED_SUCCESS';
+export enum AppReducerActionTypes {
+    INITIALIZED_SUCCESS = 'AppReducer/INITIALIZED_SUCCESS',
+}
 
-export type AppReducerActionsType = ReturnType<typeof initializedSuccess>
+export type AppReducerRootActionType = ReturnType<typeof initializedSuccess>
 
 const initialState = {
     initialized: false,
@@ -11,9 +13,9 @@ const initialState = {
 
 export type AppType = typeof initialState
 
-export const appReducer = (state = initialState, action: AppReducerActionsType): AppType => {
+export const appReducer = (state = initialState, action: AppReducerRootActionType): AppType => {
     switch (action.type) {
-        case INITIALIZED_SUCCESS:
+        case AppReducerActionTypes.INITIALIZED_SUCCESS:
             return {
                 ...state,
                 initialized: true,
@@ -25,7 +27,7 @@ export const appReducer = (state = initialState, action: AppReducerActionsType):
 
 export const initializedSuccess = () => {
     return {
-        type: INITIALIZED_SUCCESS,
+        type: AppReducerActionTypes.INITIALIZED_SUCCESS,
     } as const
 }
 export const initializeApp = (): AppThunk => {
