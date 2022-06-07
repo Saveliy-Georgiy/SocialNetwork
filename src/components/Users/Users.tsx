@@ -1,4 +1,4 @@
-import React from 'react';
+import React, { FC } from 'react';
 import s from './Users.module.css';
 import {UserType} from '../../redux/usersReducer';
 import {Paginator} from './Paginator/Paginator';
@@ -17,9 +17,8 @@ type UsersType = {
     toggleFollowingProgress: (isFetching: boolean, userId: number) => void
 }
 
-const Users = (props: UsersType) => {
-
-    const {
+export const Users: FC<UsersType> = (
+    {
         totalUsersCount,
         pageSize,
         currentPage,
@@ -29,13 +28,7 @@ const Users = (props: UsersType) => {
         follow,
         unfollow,
         onPageChanged,
-    } = props;
-    //let pagesCount = Math.ceil(totalUsersCount / pageSize);
-
-  /*  let pages = [];
-    for (let i = 1; i <= pagesCount; i++) {
-        pages.push(i);
-    }*/
+    }) => {
 
     return (
         <div>
@@ -58,5 +51,3 @@ const Users = (props: UsersType) => {
         </div>
     );
 };
-
-export default Users;

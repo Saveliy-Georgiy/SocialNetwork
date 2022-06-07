@@ -1,8 +1,8 @@
-import React from 'react';
+import React, {FC} from 'react';
 import s from './User.module.css';
 import {NavLink} from 'react-router-dom';
 import avatar from '../../../icons/avatar.jpg';
-import { UserType } from '../../../redux/usersReducer';
+import {UserType} from '../../../redux/usersReducer';
 
 type UsersType = {
     user: UserType
@@ -11,14 +11,13 @@ type UsersType = {
     unfollow: (id: number) => void
 }
 
-export const User = (props: UsersType) => {
-
-    const {
+export const User: FC<UsersType> = (
+    {
         user,
         followingInProgress,
         follow,
         unfollow,
-    } = props;
+    }) => {
 
     return (
         <div key={user.id} className={s.userWrapper}>

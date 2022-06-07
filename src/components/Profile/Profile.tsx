@@ -1,12 +1,17 @@
-import React from 'react';
+import React, {FC} from 'react';
 import ProfileInfo from './ProfileInfo/ProfileInfo';
-import MyPostsContainer from "./MyPosts/MyPostsContainer";
-import {ProfilePropsType} from "./ProfileContainer";
+import MyPostsContainer from './MyPosts/MyPostsContainer';
+import {ProfilePropsType} from './ProfileContainer';
 
-const Profile = (props: ProfilePropsType) => {
+const Profile: FC<ProfilePropsType> = (
+    {
+        profile,
+        status,
+        updateStatus,
+    }) => {
     return (
         <div>
-            <ProfileInfo profile={props.profile} status={props.status} updateStatus={props.updateStatus}/>
+            <ProfileInfo profile={profile} status={status} updateStatus={updateStatus}/>
             <MyPostsContainer/>
         </div>
     );

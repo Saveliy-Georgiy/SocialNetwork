@@ -1,8 +1,8 @@
-import React from 'react';
-import s from './ProfileInfo.module.css'
-import Preloader from "../../common/Preloader/Preloader";
-import {ProfileType} from "../../../redux/profileReducer";
-import avatar from '../../../icons/avatar.jpg'
+import React, {FC} from 'react';
+import s from './ProfileInfo.module.css';
+import Preloader from '../../common/Preloader/Preloader';
+import {ProfileType} from '../../../redux/profileReducer';
+import avatar from '../../../icons/avatar.jpg';
 import ProfileStatusWithHooks from './ProfileStatus/ProfileStatusWithHooks';
 
 type ProfileInfoPropsType = {
@@ -11,9 +11,14 @@ type ProfileInfoPropsType = {
     updateStatus: (status: string) => void
 }
 
-const ProfileInfo = (props: ProfileInfoPropsType) => {
-    if (!props.profile) {
-        return <Preloader/>
+const ProfileInfo: FC<ProfileInfoPropsType> = (
+    {
+        profile,
+        status,
+        updateStatus
+    }) => {
+    if (!profile) {
+        return <Preloader/>;
     }
     return (
         <div>
@@ -22,8 +27,8 @@ const ProfileInfo = (props: ProfileInfoPropsType) => {
                  alt="background"/>
             <div className={s.descriptionBlock}>
                 <div className={s.avatar}>
-                    <img src={props.profile.photos.large || avatar} alt="ava"/>
-                    <ProfileStatusWithHooks status={props.status} updateStatus={props.updateStatus}/>
+                    <img src={profile.photos.large || avatar} alt="ava"/>
+                    <ProfileStatusWithHooks status={status} updateStatus={updateStatus}/>
                 </div>
                 <div className={s.infoWrapper}>
                     <div className={s.myName}>Saveliy Biryukov</div>

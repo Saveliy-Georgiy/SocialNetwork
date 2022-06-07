@@ -9,7 +9,7 @@ import {
     unfollow,
     UserType,
 } from "../../redux/usersReducer";
-import Users from './Users';
+import {Users} from './Users';
 import Preloader from "../common/Preloader/Preloader";
 import {compose} from "redux";
 import {withAuthRedirect} from "../../hoc/withAuthRedirect";

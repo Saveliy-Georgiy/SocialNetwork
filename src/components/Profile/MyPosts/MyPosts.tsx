@@ -1,4 +1,4 @@
-import React from 'react';
+import React, {FC} from 'react';
 import s from './MyPosts.module.css';
 import Post from './Post/Post';
 import {PostType} from '../../../redux/profileReducer';
@@ -9,14 +9,18 @@ type MyPostsPropsType = {
     addPost: (message: string) => void
 }
 
-const MyPosts = React.memo((props: MyPostsPropsType) => {
+const MyPosts: FC<MyPostsPropsType> = React.memo((
+    {
+        posts,
+        addPost,
+    }) => {
 
-    const postsElements = props.posts.map((m: PostType) =>
+    const postsElements = posts.map((m: PostType) =>
         <Post key={m.id} id={m.id} message={m.message} likes={m.likes}/>
     );
 
     const onAddPost = (message: string) => {
-        props.addPost(message);
+        addPost(message);
     };
 
     return (
