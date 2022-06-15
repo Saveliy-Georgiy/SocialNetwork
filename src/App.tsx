@@ -1,17 +1,18 @@
-import React, {ComponentType} from 'react';
+import React, {ComponentType, Suspense} from 'react';
 import './App.css';
 import Navbar from "./components/Navbar/Navbar";
 import {HashRouter, Route, Routes} from 'react-router-dom';
-import DialogsContainer from "./components/Dialogs/DialogsContainer";
-import UsersContainer from "./components/Users/UsersContainer";
-import ProfileContainer, {withRouter} from "./components/Profile/ProfileContainer";
-import HeaderContainer from "./components/Header/HeaderContainer";
 import LoginPage from './components/Login/Login';
 import {connect, Provider} from 'react-redux';
 import {compose} from "redux";
 import {initializeApp} from "./redux/appReducer";
 import store, {AppStateType} from "./redux/reduxStore";
 import Preloader from "./components/common/Preloader/Preloader";
+
+const DialogsContainer = React.lazy(() => import("./components/Dialogs/DialogsContainer"))
+const ProfileContainer = React.lazy(() => import("./components/Profile/ProfileContainer"))
+const HeaderContainer = React.lazy(() => import("./components/Header/HeaderContainer"))
+const UsersContainer = React.lazy(() => import("./components/Users/UsersContainer"))
 
 export type AppPropsType = MapStatePropsType & MapDispatchPropsType
 
@@ -35,20 +36,18 @@ class App extends React.Component<AppPropsType, {}> {
         }
         return (
             <div className="appWrapper">
+                <Suspense fallback={<div><Preloader/></div>}>
                 <HeaderContainer/>
                 <Navbar/>
                 <div className="appWrapperContent">
                     <Routes>
-                        <Route path="/profile/*"
-                               element={<ProfileContainer/>}/>
-                        <Route path="/dialogs"
-                               element={<DialogsContainer/>}/>
-                        <Route path="/users"
-                               element={<UsersContainer/>}/>
-                        <Route path="/login"
-                               element={<LoginPage/>}/>
+                        <Route path="/profile/*" element={<ProfileContainer/>}/>
+                        <Route path="/dialogs" element={<DialogsContainer/>}/>
+                        <Route path="/users" element={<UsersContainer/>}/>
+                        <Route path="/login" element={<LoginPage/>}/>
                     </Routes>
                 </div>
+                </Suspense>
             </div>
         );
     }
@@ -59,7 +58,6 @@ const mapStateToProps = (state: AppStateType) => ({
 })
 
 let AppContainer = compose<ComponentType>(
-    withRouter,
     connect(mapStateToProps, {initializeApp,}))(App);
 
 const MainApp = () => {
