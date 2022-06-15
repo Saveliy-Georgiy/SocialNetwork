@@ -1,16 +1,16 @@
 import React, {ComponentType} from 'react';
 import './App.css';
 import Navbar from "./components/Navbar/Navbar";
-import {Route, Routes} from "react-router-dom";
+import {HashRouter, Route, Routes} from 'react-router-dom';
 import DialogsContainer from "./components/Dialogs/DialogsContainer";
 import UsersContainer from "./components/Users/UsersContainer";
 import ProfileContainer, {withRouter} from "./components/Profile/ProfileContainer";
 import HeaderContainer from "./components/Header/HeaderContainer";
 import LoginPage from './components/Login/Login';
-import {connect} from "react-redux";
+import {connect, Provider} from 'react-redux';
 import {compose} from "redux";
 import {initializeApp} from "./redux/appReducer";
-import {AppStateType} from "./redux/reduxStore";
+import store, {AppStateType} from "./redux/reduxStore";
 import Preloader from "./components/common/Preloader/Preloader";
 
 export type AppPropsType = MapStatePropsType & MapDispatchPropsType
@@ -58,6 +58,19 @@ const mapStateToProps = (state: AppStateType) => ({
     initialized: state.app.initialized
 })
 
-export default compose<ComponentType>(
+let AppContainer = compose<ComponentType>(
     withRouter,
     connect(mapStateToProps, {initializeApp,}))(App);
+
+const MainApp = () => {
+    return (
+    <React.StrictMode>
+        <HashRouter>
+            <Provider store={store}>
+                <AppContainer/>
+            </Provider>
+        </HashRouter>
+    </React.StrictMode>
+)}
+
+export default MainApp;
