@@ -5,13 +5,15 @@ import {ProfilePropsType} from './ProfileContainer';
 
 const Profile: FC<ProfilePropsType> = (
     {
+        savePhoto,
+        isOwner,
         profile,
         status,
         updateStatus,
     }) => {
     return (
         <div>
-            <ProfileInfo profile={profile} status={status} updateStatus={updateStatus}/>
+            <ProfileInfo savePhoto={savePhoto} isOwner={isOwner} profile={profile} status={status} updateStatus={updateStatus}/>
             <MyPostsContainer/>
         </div>
     );

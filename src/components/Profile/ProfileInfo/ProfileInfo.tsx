@@ -1,4 +1,4 @@
-import React, {FC} from 'react';
+import React, {ChangeEvent, FC} from 'react';
 import s from './ProfileInfo.module.css';
 import Preloader from '../../common/Preloader/Preloader';
 import {ProfileType} from '../../../redux/profileReducer';
@@ -6,20 +6,31 @@ import avatar from '../../../icons/avatar.jpg';
 import ProfileStatusWithHooks from './ProfileStatus/ProfileStatusWithHooks';
 
 type ProfileInfoPropsType = {
+    isOwner: boolean
     profile: ProfileType | null
     status: string
     updateStatus: (status: string) => void
+    savePhoto: (file: File) => void
 }
 
 const ProfileInfo: FC<ProfileInfoPropsType> = (
     {
+        savePhoto,
+        isOwner,
         profile,
         status,
-        updateStatus
+        updateStatus,
     }) => {
     if (!profile) {
         return <Preloader/>;
     }
+
+    const onMainPhotoSelected = (e: ChangeEvent<HTMLInputElement>) => {
+        if (e.target.files && e.target.files.length) {
+            savePhoto(e.target.files[0])
+        }
+    }
+
     return (
         <div>
             <img className={s.background}
@@ -28,6 +39,7 @@ const ProfileInfo: FC<ProfileInfoPropsType> = (
             <div className={s.descriptionBlock}>
                 <div className={s.avatar}>
                     <img src={profile.photos.large || avatar} alt="ava"/>
+                    {isOwner && <input type={"file"} onChange={onMainPhotoSelected}/>}
                     <ProfileStatusWithHooks status={status} updateStatus={updateStatus}/>
                 </div>
                 <div className={s.infoWrapper}>

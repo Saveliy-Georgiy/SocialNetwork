@@ -7,14 +7,16 @@ export enum ProfileActionTypes {
     SET_USER_PROFILE = 'Profile/SET_USER_PROFILE',
     SET_STATUS = 'Profile/SET_STATUS',
     DELETE_POST = 'Profile/DELETE_POST',
-    SEND_MESSAGE = 'Profile/Dialogs/SEND_MESSAGE',
+    SEND_MESSAGE = 'Profile/SEND_MESSAGE',
+    SAVE_PHOTO_SUCCESS = 'Profile/SAVE_PHOTO_SUCCESS'
 }
 
 export type ProfileRootActionType =
-    ReturnType<typeof addPost>
+    | ReturnType<typeof addPost>
     | ReturnType<typeof setUserProfile>
     | ReturnType<typeof setStatus>
     | ReturnType<typeof deletePost>
+    | ReturnType<typeof savePhotoSuccess>
 
 export type PostType = {
     id: string
@@ -33,7 +35,7 @@ type ContactsType = {
     mainLink: string
 }
 
-type PhotosType = {
+export type PhotosType = {
     small: string | null
     large: string | null
 }
@@ -75,6 +77,8 @@ const profileReducer = (state = initialState, action: ProfileRootActionType): Pr
             return {...state, status: action.status};
         case ProfileActionTypes.DELETE_POST:
             return {...state, posts: state.posts.filter(p => p.id !== action.postId && p)};
+        case ProfileActionTypes.SAVE_PHOTO_SUCCESS:
+            return {...state, profile: {...state.profile, photos: action.photos} as ProfileType}
         default:
             return state;
     }
@@ -104,6 +108,12 @@ export const deletePost = (postId: string) => {
         postId,
     } as const;
 };
+export const savePhotoSuccess = (photos: PhotosType) => {
+    return {
+        type: ProfileActionTypes.SAVE_PHOTO_SUCCESS,
+        photos,
+    } as const;
+};
 
 export const getUserProfile = (userId: string): AppThunk => async (dispatch) => {
     let response = await profileAPI.setUserProfile(userId);
@@ -119,5 +129,12 @@ export const updateStatus = (status: string): AppThunk => async (dispatch) => {
         dispatch(setStatus(status));
     }
 };
+export const savePhoto = (file: File): AppThunk => async (dispatch) => {
+    let response = await profileAPI.savePhoto(file);
+    if (response.data.resultCode === 0) {
+        dispatch(savePhotoSuccess(response.data.data.photos));
+    }
+};
+
 
 export default profileReducer;
